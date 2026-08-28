@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprobante de Pre-Matrícula - Escuela Arturo Alessandri</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <style>
+        /* Estilos exclusivos para la vista del comprobante y para impresión */
+        .comprobante-card {
+            border-top: 6px solid var(--azul-marino);
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .numero-folio {
+            color: var(--rosado-institucional);
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .badge-estado {
+            background-color: var(--azul-marino);
+            color: white;
+            font-size: 0.9rem;
+            padding: 0.5em 1em;
+            border-radius: 20px;
+        }
+
+        /* Ocultar botones y adaptar diseño al imprimir */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background-color: white !important;
+            }
+
+            .comprobante-card {
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light py-5">
+
+    <div class="container">
+        <div class="card comprobante-card shadow-sm p-4 bg-white">
+
+            <!-- ENCABEZADO INSTITUCIONAL -->
+            <div class="text-center mb-4 border-bottom pb-3">
+                <img src="assets/logo.png" alt="Logo Escuela Arturo Alessandri" class="logo-escuela mb-2"
+                    style="max-height: 100px;">
+                <h3 class="fw-bold mb-1" style="color: var(--azul-marino);">Escuela de Niñas Arturo Alessandri</h3>
+                <p class="text-muted small mb-0">Comprobante Oficial de Pre-Matrícula - Proceso Admisión 2027</p>
+            </div>
+
+            <!-- CUERPO DEL COMPROBANTE -->
+            <div class="text-center my-3">
+                <span class="badge badge-estado mb-3">REGISTRO EXITOSO</span>
+                <p class="text-muted mb-1">Número Folio de Atención:</p>
+                <div class="numero-folio id-destacado mb-2" id="lblNumeroMatricula">
+                    ---
+                </div>
+                <p class="small text-muted">Fecha y hora de registro: <span id="lblFechaRegistro"
+                        class="fw-semibold">---</span></p>
+            </div>
+
+            <!-- INDICACIONES PARA EL APODERADO -->
+            <div class="alert alert-secondary mt-3 p-3" style="font-size: 0.9rem;">
+                <h6 class="fw-bold mb-2" style="color: var(--azul-marino);">Pasos Siguientes:</h6>
+                <ol class="mb-0 ps-3">
+                    <li>Se ha enviado una confirmación con este número de comprobante al correo registrado.</li>
+                    <li>Conserve este número de folio o imprima este documento para la etapa presencial de validación de
+                        antecedentes.</li>
+                    <li>Si requiere realizar alguna modificación, acérquese a la secretaría del establecimiento
+                        presentando este folio.</li>
+                </ol>
+            </div>
+            <!-- Mensaje informativo de correo enviado -->
+            <div id="mensajeCorreoContenedor" class="alert alert-info mt-3" role="alert">
+                <i class="bi bi-envelope-check-fill"></i>
+                Una copia de este comprobante fue enviada automáticamente al correo:
+                <strong id="correoApoderadoTexto">cargando...</strong>
+            </div>
+
+            <!-- ACCIONES (NO VISIBLES AL IMPRIMIR) -->
+            <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top no-print">
+                <a href="index.html" class="btn btn-outline-secondary">
+                    Volver al Inicio
+                </a>
+                <button onclick="window.print()" class="btn btn-accent">
+                    Imprimir Comprobante
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Recuperar datos almacenados en sessionStorage
+            const numeroMatricula = sessionStorage.getItem('numeroMatricula');
+            const fechaRegistro = sessionStorage.getItem('fechaRegistro');
+            const correoComprobante = sessionStorage.getItem('correoComprobante');
+
+            // 2. Seleccionar los elementos por sus IDs EXACTOS del HTML
+            const elemNumero = document.getElementById('lblNumeroMatricula');
+            const elemFecha = document.getElementById('lblFechaRegistro');
+            const elemCorreo = document.getElementById('correoApoderadoTexto');
+
+            // 3. Asignar el Número de Matrícula
+            if (elemNumero) {
+                elemNumero.innerText = numeroMatricula ? numeroMatricula : '---';
+            }
+
+            // 4. Asignar y formatear la Fecha de Registro
+            if (elemFecha) {
+                if (fechaRegistro) {
+                    try {
+                        const fecha = new Date(fechaRegistro);
+                        // Formatea la fecha a un estilo amigable: "06/08/2026 13:10"
+                        elemFecha.innerText = fecha.toLocaleString('es-CL', {
+                            dateStyle: 'medium',
+                            timeStyle: 'short'
+                        });
+                    } catch (e) {
+                        elemFecha.innerText = fechaRegistro;
+                    }
+                } else {
+                    elemFecha.innerText = '---';
+                }
+            }
+
+            // 5. Asignar el Correo
+            if (elemCorreo) {
+                elemCorreo.innerText = correoComprobante ? correoComprobante : 'No registrado';
+            }
+        });
+    </script>
+
+</body>
+
+</html>

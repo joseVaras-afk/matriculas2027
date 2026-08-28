@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Matrícula - Escuela Arturo Alessandri</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { font-family: Arial, sans-serif; font-size: 12px; color: #000; background: #fff; }
+        .titulo-escuela { color: #002060; font-weight: bold; }
+        .folio-destacado { color: #C00063; font-weight: bold; }
+        .seccion-titulo { background-color: #f0f4f8; color: #002060; font-weight: bold; padding: 4px 8px; border-left: 4px solid #002060; margin-top: 12px; margin-bottom: 6px; font-size: 11px; }
+        .table-ficha { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+        .table-ficha td { border: 1px solid #ccc; padding: 5px 8px; width: 50%; vertical-align: top; }
+        .label-campo { font-weight: bold; color: #333; }
+        @media print { .no-print { display: none !important; } body { padding: 10px; } }
+    </style>
+</head>
+<body class="p-4">
+
+    <!-- BOTONES -->
+    <div class="text-end mb-3 no-print">
+        <button onclick="window.print()" class="btn btn-primary btn-sm">🖨️ Imprimir Ficha</button>
+        <button onclick="window.close()" class="btn btn-secondary btn-sm">Cerrar</button>
+    </div>
+
+    <!-- ENCABEZADO -->
+    <div class="text-center mb-3">
+        <img src="assets/logo.png" style="max-height: 60px;" alt="Logo" class="mb-1" onerror="this.style.display='none'">
+        <h4 class="titulo-escuela mb-0">ESCUELA DE NIÑAS ARTURO ALESSANDRI</h4>
+        <div class="fw-bold text-muted small">FICHA OFICIAL DE PRE-MATRÍCULA - PROCESO ADMISIÓN 2027</div>
+        <div class="folio-destacado mt-1">
+            FOLIO N°: <span id="lblFolio">---</span> | CURSO POSTULACIÓN: <span id="lblCurso">---</span>
+        </div>
+    </div>
+
+    <!-- 1. ALUMNA -->
+    <div class="seccion-titulo">1. ANTECEDENTES DE LA ALUMNA</div>
+    <table class="table-ficha">
+        <tr>
+            <td><span class="label-campo">Nombre Completo:</span> <span id="alumnaNombre"></span></td>
+            <td><span class="label-campo">RUT:</span> <span id="alumnaRut"></span></td>
+        </tr>
+        <tr>
+            <td><span class="label-campo">Fecha Nacimiento:</span> <span id="alumnaFechaNac"></span></td>
+            <td><span class="label-campo">Nacionalidad:</span> Chilena</td>
+        </tr>
+        <tr>
+            <td><span class="label-campo">Dirección:</span> <span id="alumnaDireccion"></span></td>
+            <td><span class="label-campo">Comuna:</span> <span id="alumnaComuna"></span></td>
+        </tr>
+        <tr>
+            <td><span class="label-campo">Vive con:</span> <span id="alumnaViveCon"></span></td>
+        </tr>
+    </table>
+
+    <!-- 2. APODERADO 1 -->
+    <div class="seccion-titulo">2. DATOS DEL APODERADO TITULAR (APODERADO 1)</div>
+    <table class="table-ficha">
+        <tr>
+            <td><span class="label-campo">Nombre Completo:</span> <span id="apo1Nombre"></span></td>
+            <td><span class="label-campo">RUT:</span> <span id="apo1Rut"></span></td>
+        </tr>
+        <tr>
+            <td><span class="label-campo">Parentesco:</span> <span id="apo1Parentesco"></span></td>
+            <td><span class="label-campo">Teléfono:</span> <span id="apo1Tel"></span></td>
+        </tr>
+        <tr>
+            <td><span class="label-campo">Correo Electrónico:</span> <span id="apo1Correo"></span></td>
+            <td><span class="label-campo">Dirección:</span> <span id="apo1Direccion"></span></td>
+            <td><span class="label-campo">Comuna:</span> <span id="apo1Comuna"></span></td> 
+        </tr>
+    </table>
+
+    <!-- 3. APODERADO 2 -->
+    <div class="seccion-titulo">3. DATOS DEL APODERADO SUPLENTE (APODERADO 2)</div>
+    <table class="table-ficha">
+        <tr>
+            <td><span class="label-campo">Nombre Completo:</span> <span id="apo2Nombre"></span></td>
+            <td><span class="label-campo">RUT:</span> <span id="apo2Rut"></span></td>
+        </tr>
+        <tr>
+            <td><span class="label-campo">Parentesco:</span> <span id="apo2Parentesco"></span></td>
+            <td><span class="label-campo">Teléfono:</span> <span id="apo2Tel"></span></td>
+        </tr>
+        <tr>
+            <td><span class="label-campo">Correo Electrónico:</span> <span id="apo2Correo"></span></td>
+            <td><span class="label-campo">Dirección:</span> <span id="apo2Direccion"></span></td>
+            <td><span class="label-campo">Comuna:</span> <span id="apo2Comuna"></span></td>
+        </tr>
+    </table>
+
+    <!-- 4. PADRES -->
+    <div class="seccion-titulo">4. ANTECEDENTES DE LA MADRE Y DEL PADRE</div>
+    <table class="table-ficha">
+        <tr>
+            <td><span class="label-campo">Nombre Madre:</span> <span id="madreNombre"></span></td>
+            <td><span class="label-campo">RUT Madre:</span> <span id="madreRut"></span></td>
+        </tr>
+        <tr>
+            <td><span class="label-campo">Teléfono Madre:</span> <span id="madreTel"></span></td>
+            <td><span class="label-campo">Dirección/Comuna:</span> <span id="madreDirComuna"></span></td>
+        </tr>
+        <tr>
+            <td><span class="label-campo">Nombre Padre:</span> <span id="padreNombre"></span></td>
+            <td><span class="label-campo">RUT Padre:</span> <span id="padreRut"></span></td>
+        </tr>
+        <tr>
+            <td><span class="label-campo">Teléfono Padre:</span> <span id="padreTel"></span></td>
+            <td><span class="label-campo">Dirección:</span> <span id="padreDireccion"></span></td>
+            <td><span class="label-campo">Comuna:</span> <span id="padreComuna"></span></td>
+        </tr>
+    </table>
+
+    <!-- 4. PERSONA AUTORIZADA PARA RETIRAR -->
+    <div class="seccion-titulo">4. PERSONA AUTORIZADA PARA RETIRAR A LA ALUMNA</div>
+    <table class="table-ficha">
+        <tr>
+            <td><span class="label-campo">Nombre Completo:</span> <span id="apo2Nombre"></span></td>
+            <td><span class="label-campo">RUT:</span> <span id="apo2Rut"></span></td>
+        </tr>
+        <tr>
+            <td><span class="label-campo">Parentesco:</span> <span id="apo2Parentesco"></span></td>
+            <td><span class="label-campo">Teléfono:</span> <span id="apo2Tel"></span></td>
+        </tr>
+
+    <!-- 5. FICHA MÉDICA -->
+    <div class="seccion-titulo">5. FICHA MÉDICA Y SALUD</div>
+    <table class="table-ficha">
+        <tr>
+            <td><span class="label-campo">¿Es Alérgica?:</span> <span id="medAlergica"></span></td>
+            <td><span class="label-campo">Detalle Alergias:</span> <span id="medAlergiasDetalle"></span></td>
+        </tr>
+        <tr>
+            <td><span class="label-campo">¿Toma Medicamentos?:</span> <span id="medMedicamentos"></span></td>
+            <td><span class="label-campo">Detalle Medicamentos:</span> <span id="medMedicamentosDetalle"></span></td>
+        </tr>
+        <tr>
+            <td colspan="2"><span class="label-campo">Condición Médica Adicional:</span> <span id="medCondicion"></span></td>
+        </tr>
+    </table>
+
+    <!-- 6. DECLARACIÓN PEI -->
+    <div class="seccion-titulo">6. DECLARACIÓN Y COMPROMISO DEL APODERADO</div>
+    <p style="font-size: 11px; text-align: justify;" class="my-2">
+        Yo, <strong id="declaraNombreApo">____________________</strong>, RUT <strong id="declaraRutApo">____________</strong>, 
+        apoderado(a) de <strong id="declaraNombreAlumna">____________________</strong>, declaro haber leído y tomado conocimiento 
+        del Proyecto Educativo Institucional (PEI), haciéndome parte voluntaria y conscientemente de lo declarado en este por la escuela. 
+        Adscribo plenamente a lo expuesto en el Proyecto Educativo y me comprometo a apoyar todas las actividades curriculares y extracurriculares que la escuela realice.
+    </p>
+
+    <!-- FIRMAS -->
+    <div class="row text-center mt-5 pt-3">
+        <div class="col-6">
+            <div>_____________________________________</div>
+            <strong style="font-size: 11px;">FIRMA APODERADO</strong>
+        </div>
+        <div class="col-6">
+            <div>_____________________________________</div>
+            <strong style="font-size: 11px;">TIMBRE / FIRMA RECEPCIÓN ESCUELA</strong>
+        </div>
+    </div>
+
+    <script>
+        function limpiar(val) {
+            if (val === null || val === undefined || val === 'null' || val === 'undefined') return '';
+            return String(val).trim();
+        }
+
+        function formarNombre(n, ap, am) {
+            return [limpiar(n), limpiar(ap), limpiar(am)].filter(Boolean).join(' ');
+        }
+
+        function formarDirComuna(dir, com) {
+            const d = limpiar(dir), c = limpiar(com);
+            return (d && c) ? `${d},${c}` : (d || c);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            if (!id) {
+                alert('No se especificó un ID de matrícula en la URL.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/matriculas/${id}`);
+                if (!response.ok) throw new Error('Error al consultar datos');
+                
+                const m = await response.json();
+
+                // Datos de la Matrícula
+                document.getElementById('lblFolio').innerText = limpiar(m?.numeroMatricula);
+                document.getElementById('lblCurso').innerText = limpiar(m?.cursoActual);
+
+                // Datos de Alumna
+                const alu = m?.alumna;
+                const nomAlu = formarNombre(alu?.nombres, alu?.apellidoPaterno, alu?.apellidoMaterno);
+                document.getElementById('alumnaNombre').innerText = nomAlu;
+                document.getElementById('alumnaRut').innerText = limpiar(alu?.rut);
+                document.getElementById('alumnaFechaNac').innerText = limpiar(alu?.fechaNacimiento);
+                document.getElementById('alumnaDireccion').innerText = limpiar(alu?.direccion);
+                document.getElementById('alumnaComuna').innerText = limpiar(alu?.comuna);
+                document.getElementById('alumnaViveCon').innerText = limpiar(alu?.viveCon);
+
+                // Apoderado 1
+                const apo1 = m?.apoderadoTitular;
+                const nomApo1 = formarNombre(apo1?.nombres, apo1?.apellidos, '');
+                document.getElementById('apo1Nombre').innerText = nomApo1;
+                document.getElementById('apo1Rut').innerText = limpiar(apo1?.rut);
+                document.getElementById('apo1Parentesco').innerText = limpiar(apo1?.parentesco);
+                document.getElementById('apo1Tel').innerText = limpiar(apo1?.telefono1);
+                document.getElementById('apo1Correo').innerText = limpiar(apo1?.correoElectronico);
+                document.getElementById('apo1Direccion').innerText = limpiar(apo1?.direccion);
+                document.getElementById('apo1Comuna').innerText = limpiar(apo1?.comuna);
+
+                // Apoderado 2
+                const apo2 = m?.apoderadoSuplente;
+                document.getElementById('apo2Nombre').innerText = formarNombre(apo2?.nombres, apo2?.apellidos, '');
+                document.getElementById('apo2Rut').innerText = limpiar(apo2?.rut);
+                document.getElementById('apo2Parentesco').innerText = limpiar(apo2?.parentesco);
+                document.getElementById('apo2Tel').innerText = limpiar(apo2?.telefono1);
+                document.getElementById('apo2Correo').innerText = limpiar(apo2?.correoElectronico);
+                document.getElementById('apo2Direccion').innerText = limpiar(apo2?.direccion);
+                document.getElementById('apo2Comuna').innerText = limpiar(apo2?.comuna);
+
+                // Padres
+                const madre = m?.madre;
+                document.getElementById('madreNombre').innerText = formarNombre(madre?.nombres, madre?.apellidos, '');
+                document.getElementById('madreRut').innerText = limpiar(madre?.rut);
+                document.getElementById('madreTel').innerText = limpiar(madre?.telefono1);
+                document.getElementById('madreDirComuna').innerText = formarDirComuna(madre?.direccion, madre?.comuna);
+
+                const padre = m?.padre;
+                document.getElementById('padreNombre').innerText = formarNombre(padre?.nombres, padre?.apellidos, '');
+                document.getElementById('padreRut').innerText = limpiar(padre?.rut);
+                document.getElementById('padreTel').innerText = limpiar(padre?.telefono1);
+                document.getElementById('padreDirComuna').innerText = formarDirComuna(padre?.direccion, padre?.comuna);
+
+                const ret = m?.autorizadosRetiro;
+                document.getElementById('apo2Nombre').innerText = formarNombre(ret?.nombreCompleto, '', '');
+                document.getElementById('apo2Rut').innerText = limpiar(ret?.rut);
+                document.getElementById('apo2Parentesco').innerText = limpiar(ret?.parentescoFurgon);
+                document.getElementById('apo2Tel').innerText = limpiar(ret?.telefono);
+
+
+                // Ficha Médica
+                const fm = m?.fichaMedica;
+                document.getElementById('medAlergica').innerText = fm?.esAlergica ? 'SÍ' : 'NO';
+                document.getElementById('medAlergiasDetalle').innerText = fm?.esAlergica ? limpiar(fm?.detalleAlergias) : '';
+                document.getElementById('medMedicamentos').innerText = fm?.tomaMedicamentos ? 'SÍ' : 'NO';
+                document.getElementById('medMedicamentosDetalle').innerText = fm?.tomaMedicamentos ? limpiar(fm?.detalleMedicamentos) : '';
+                document.getElementById('medCondicion').innerText = limpiar(fm?.condicionMedicaAdicional);
+
+                // Declaración
+                document.getElementById('declaraNombreApo').innerText = nomApo1 || '____________________';
+                document.getElementById('declaraRutApo').innerText = limpiar(apo1?.rut) || '____________';
+                document.getElementById('declaraNombreAlumna').innerText = nomAlu || '____________________';
+
+                // Disparar ventana de impresión automáticamente
+                setTimeout(() => window.print(), 400);
+
+            } catch (err) {
+                console.error("Error cargando la ficha:", err);
+            }
+        });
+    </script>
+</body>
+</html>

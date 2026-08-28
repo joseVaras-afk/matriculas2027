@@ -1,0 +1,70 @@
+:root {
+    --azul-marino: #1A365D;
+    --rosado-institucional: #D81B60; /* Un rosado elegante y moderno */
+    --fondo-claro: #f7d2f4;
+}
+
+body {
+    background-color: var(--fondo-claro);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Estilo para el Logo */
+.logo-escuela {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+/* Tarjetas (Cards) del formulario */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid var(--azul-marino);
+}
+
+.card-header {
+    background-color: transparent;
+    border-bottom: 1px solid #eee;
+    color: var(--azul-marino);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Botones institucionales */
+.btn-primary {
+    background-color: var(--azul-marino);
+    border-color: var(--azul-marino);
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+}
+
+.btn-primary:hover {
+    background-color: #0f2442;
+    border-color: #0f2442;
+}
+
+.btn-accent {
+    background-color: var(--rosado-institucional);
+    border-color: var(--rosado-institucional);
+    color: white;
+    font-weight: 600;
+}
+
+.btn-accent:hover {
+    background-color: #b0154d;
+    color: white;
+}
+
+/* Inputs enfocados */
+.form-control:focus, .form-select:focus {
+    border-color: var(--rosado-institucional);
+    box-shadow: 0 0 0 0.25rem rgba(216, 27, 96, 0.25);
+}
+
+/* Mensajes de error personalizados */
+.invalid-feedback {
+    color: var(--rosado-institucional);
+    font-weight: 500;
+}

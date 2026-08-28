@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Ficha de Matrícula</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+</head>
+
+<body class="bg-light py-4">
+    <div class="container" style="max-width: 900px;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Editar Ficha - Folio <span id="txtFolio" class="text-primary">---</span></h2>
+            <a href="admin.html" class="btn btn-outline-secondary">Volver al Panel</a>
+        </div>
+
+        <form id="formEditar" class="card shadow-sm p-4">
+            <!-- SECCIÓN 1: DATOS DE LA ESTUDIANTE -->
+            <div class="card mb-4">
+                <div class="card-header">1. Datos de la Estudiante</div>
+                <div class="card-body row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Curso al que Postula/Matricula *</label>
+                        <select class="form-select" id="cursoActual" required>
+                            <option value="">Seleccione un curso</option>
+                            <option value="PRE-KINDER A">PRE-KINDER A</option>
+                            <option value="PRE-KINDER B">PRE-KINDER B</option>
+                            <option value="KINDER A">KINDER A</option>
+                            <option value="KINDER B">KINDER B</option>
+                            <option value="KINDER C">KINDER C</option>
+                            <option value="KINDER D">KINDER D</option>
+                            <option value="1°A">1°A</option>
+                            <option value="1°B">1°B</option>
+                            <option value="1°C">1°C</option>
+                            <option value="2°A">2°A</option>
+                            <option value="2°B">2°B</option>
+                            <option value="2°C">2°C</option>
+                            <option value="3°A">3°A</option>
+                            <option value="3°B">3°B</option>
+                            <option value="3°C">3°C</option>
+                            <option value="4°A">4°A</option>
+                            <option value="4°B">4°B</option>
+                            <option value="4°C">4°C</option>
+                            <option value="5°A">5°A</option>
+                            <option value="5°B">5°B</option>
+                            <option value="5°C">5°C</option>
+                            <option value="6°A">6°A</option>
+                            <option value="6°B">6°B</option>
+                            <option value="6°C">6°C</option>
+                            <option value="7°A">7°A</option>
+                            <option value="7°B">7°B</option>
+                            <option value="7°C">7°C</option>
+                            <option value="8°A">8°A</option>
+                            <option value="8°B">8°B</option>
+                            <option value="8°C">8°C</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">RUT / IPE Estudiante *</label>
+                        <input type="text" class="form-control rut-input" id="alumnaRut" placeholder="12345678-9"
+                            required>
+                        <div class="invalid-feedback">RUT inválido.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Fecha de Nacimiento *</label>
+                        <input type="date" class="form-control" id="alumnaFechaNac" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Nombres *</label>
+                        <input type="text" class="form-control text-uppercase" id="alumnaNombres" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Apellido Paterno *</label>
+                        <input type="text" class="form-control text-uppercase" id="alumnaApellidoP" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Apellido Materno *</label>
+                        <input type="text" class="form-control text-uppercase" id="alumnaApellidoM" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Dirección (Calle, Número) *</label>
+                        <input type="text" class="form-control text-uppercase" id="alumnaDireccion" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Comuna *</label>
+                        <select class="form-select" id="alumnaComuna" required>
+                            <option value="">Seleccione su comuna</option>
+                            <option value="Alhué">Alhué</option>
+                            <option value="Buin">Buin</option>
+                            <option value="Calera de Tango">Calera de Tango</option>
+                            <option value="Cerrillos">Cerrillos</option>
+                            <option value="Cerro Navia">Cerro Navia</option>
+                            <option value="Colina">Colina</option>
+                            <option value="Conchalí">Conchalí</option>
+                            <option value="Curacaví">Curacaví</option>
+                            <option value="El Bosque">El Bosque</option>
+                            <option value="El Monte">El Monte</option>
+                            <option value="Estación Central">Estación Central</option>
+                            <option value="Huechuraba">Huechuraba</option>
+                            <option value="Independencia">Independencia</option>
+                            <option value="Isla de Maipo">Isla de Maipo</option>
+                            <option value="La Cisterna">La Cisterna</option>
+                            <option value="La Florida">La Florida</option>
+                            <option value="La Granja">La Granja</option>
+                            <option value="La Pintana">La Pintana</option>
+                            <option value="La Reina">La Reina</option>
+                            <option value="Lampa">Lampa</option>
+                            <option value="Las Condes">Las Condes</option>
+                            <option value="Lo Barnechea">Lo Barnechea</option>
+                            <option value="Lo Espejo">Lo Espejo</option>
+                            <option value="Lo Prado">Lo Prado</option>
+                            <option value="Macul">Macul</option>
+                            <option value="Maipú">Maipú</option>
+                            <option value="María Pinto">María Pinto</option>
+                            <option value="Melipilla">Melipilla</option>
+                            <option value="Ñuñoa">Ñuñoa</option>
+                            <option value="Padre Hurtado">Padre Hurtado</option>
+                            <option value="Paine">Paine</option>
+                            <option value="Pedro Aguirre Cerda">Pedro Aguirre Cerda</option>
+                            <option value="Peñaflor">Peñaflor</option>
+                            <option value="Peñalolén">Peñalolén</option>
+                            <option value="Pirque">Pirque</option>
+                            <option value="Providencia">Providencia</option>
+                            <option value="Pudahuel">Pudahuel</option>
+                            <option value="Puente Alto">Puente Alto</option>
+                            <option value="Quilicura">Quilicura</option>
+                            <option value="Quinta Normal">Quinta Normal</option>
+                            <option value="Recoleta">Recoleta</option>
+                            <option value="Renca">Renca</option>
+                            <option value="San Bernardo">San Bernardo</option>
+                            <option value="San Joaquín">San Joaquín</option>
+                            <option value="San José de Maipo">San José de Maipo</option>
+                            <option value="San Miguel">San Miguel</option>
+                            <option value="San Pedro">San Pedro</option>
+                            <option value="San Ramón">San Ramón</option>
+                            <option value="Santiago">Santiago (Comuna Central)</option>
+                            <option value="Talagante">Talagante</option>
+                            <option value="Tiltil">Tiltil</option>
+                            <option value="Vitacura">Vitacura</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">La alumna vive con: *</label>
+                        <select class="form-select" id="alumnaViveCon" required>
+                            <option value="">Seleccione...</option>
+                            <option value="LA MADRE">LA MADRE</option>
+                            <option value="EL PADRE">EL PADRE</option>
+                            <option value="AMBOS PADRES">AMBOS PADRES</option>
+                            <option value="OTRO FAMILIAR">OTRO FAMILIAR</option>
+                            <option value="TUTOR LEGAL">TUTOR LEGAL</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 2: APODERADO TITULAR -->
+            <div class="card mb-4">
+                <div class="card-header">2. Apoderado Titular</div>
+                <div class="card-body row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">RUT *</label>
+                        <input type="text" class="form-control rut-input" id="apoRut" placeholder="12345678-9" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Nombres *</label>
+                        <input type="text" class="form-control text-uppercase" id="apoNombres" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Apellidos *</label>
+                        <input type="text" class="form-control text-uppercase" id="apoApellidos" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Parentesco *</label>
+                        <select class="form-select" id="apoParentesco" required>
+                        <option value="">Seleccione un parentesco</option>
+                        <option value="MAMA">MAMÁ / MADRE</option>
+                        <option value="PAPA">PAPÁ / PADRE</option>
+                        <option value="ABUELO/ABUELA">ABUELO/ABUELA</option>
+                        <option value="TIO/TIA">TÍO/TÍA</option>
+                        <option value="HERMANO/A">HERMANO/A</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Teléfono / Celular *</label>
+                        <input type="text" class="form-control" id="apoTelefono" placeholder="912345678" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Correo Electrónico *</label>
+                        <input type="email" class="form-control" id="apoCorreo" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Dirección (Calle, Número) *</label>
+                        <input type="text" class="form-control text-uppercase" id="apoDireccion" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Comuna *</label>
+                        <select class="form-select" id="apoComuna" required>
+                            <option value="">Seleccione su comuna</option>
+                            <option value="Alhué">Alhué</option>
+                            <option value="Buin">Buin</option>
+                            <option value="Calera de Tango">Calera de Tango</option>
+                            <option value="Cerrillos">Cerrillos</option>
+                            <option value="Cerro Navia">Cerro Navia</option>
+                            <option value="Colina">Colina</option>
+                            <option value="Conchalí">Conchalí</option>
+                            <option value="Curacaví">Curacaví</option>
+                            <option value="El Bosque">El Bosque</option>
+                            <option value="El Monte">El Monte</option>
+                            <option value="Estación Central">Estación Central</option>
+                            <option value="Huechuraba">Huechuraba</option>
+                            <option value="Independencia">Independencia</option>
+                            <option value="Isla de Maipo">Isla de Maipo</option>
+                            <option value="La Cisterna">La Cisterna</option>
+                            <option value="La Florida">La Florida</option>
+                            <option value="La Granja">La Granja</option>
+                            <option value="La Pintana">La Pintana</option>
+                            <option value="La Reina">La Reina</option>
+                            <option value="Lampa">Lampa</option>
+                            <option value="Las Condes">Las Condes</option>
+                            <option value="Lo Barnechea">Lo Barnechea</option>
+                            <option value="Lo Espejo">Lo Espejo</option>
+                            <option value="Lo Prado">Lo Prado</option>
+                            <option value="Macul">Macul</option>
+                            <option value="Maipú">Maipú</option>
+                            <option value="María Pinto">María Pinto</option>
+                            <option value="Melipilla">Melipilla</option>
+                            <option value="Ñuñoa">Ñuñoa</option>
+                            <option value="Padre Hurtado">Padre Hurtado</option>
+                            <option value="Paine">Paine</option>
+                            <option value="Pedro Aguirre Cerda">Pedro Aguirre Cerda</option>
+                            <option value="Peñaflor">Peñaflor</option>
+                            <option value="Peñalolén">Peñalolén</option>
+                            <option value="Pirque">Pirque</option>
+                            <option value="Providencia">Providencia</option>
+                            <option value="Pudahuel">Pudahuel</option>
+                            <option value="Puente Alto">Puente Alto</option>
+                            <option value="Quilicura">Quilicura</option>
+                            <option value="Quinta Normal">Quinta Normal</option>
+                            <option value="Recoleta">Recoleta</option>
+                            <option value="Renca">Renca</option>
+                            <option value="San Bernardo">San Bernardo</option>
+                            <option value="San Joaquín">San Joaquín</option>
+                            <option value="San José de Maipo">San José de Maipo</option>
+                            <option value="San Miguel">San Miguel</option>
+                            <option value="San Pedro">San Pedro</option>
+                            <option value="San Ramón">San Ramón</option>
+                            <option value="Santiago">Santiago (Comuna Central)</option>
+                            <option value="Talagante">Talagante</option>
+                            <option value="Tiltil">Tiltil</option>
+                            <option value="Vitacura">Vitacura</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 3: APODERADO 2 -->
+            <div class="card mb-4">
+                <div class="card-header">3. Apoderado 2</div>
+                <div class="card-body row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">RUT *</label>
+                        <input type="text" class="form-control rut-input" id="apoRut2" placeholder="12345678-9"
+                            required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Nombres *</label>
+                        <input type="text" class="form-control text-uppercase" id="apoNombres2" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Apellidos *</label>
+                        <input type="text" class="form-control text-uppercase" id="apoApellidos2" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Parentesco *</label>
+                        <select class="form-select" id="apoParentesco2" required>
+                            <option value="">Seleccione un parentesco</option>
+                            <option value="">Seleccione un parentesco</option>
+                            <option value="MAMA">MAMÁ / MADRE</option>
+                            <option value="PAPA">PAPÁ / PADRE</option>
+                            <option value="ABUELO/ABUELA">ABUELO/ABUELA</option>
+                            <option value="TIO/TIA">TÍO/TÍA</option>
+                            <option value="HERMANO/A">HERMANO/A</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Teléfono / Celular *</label>
+                        <!-- CORREGIDO ID A apoTelefono2 -->
+                        <input type="text" class="form-control" id="apoTelefono2" placeholder="912345678" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Correo Electrónico *</label>
+                        <!-- CORREGIDO ID A apoCorreo2 -->
+                        <input type="email" class="form-control" id="apoCorreo2" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Dirección (Calle, Número) *</label>
+                        <input type="text" class="form-control text-uppercase" id="apoDireccion2" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Comuna *</label>
+                        <select class="form-select" id="apoComuna2" required>
+                            <option value="">Seleccione su comuna</option>
+                            <option value="Alhué">Alhué</option>
+                            <option value="Buin">Buin</option>
+                            <option value="Calera de Tango">Calera de Tango</option>
+                            <option value="Cerrillos">Cerrillos</option>
+                            <option value="Cerro Navia">Cerro Navia</option>
+                            <option value="Colina">Colina</option>
+                            <option value="Conchalí">Conchalí</option>
+                            <option value="Curacaví">Curacaví</option>
+                            <option value="El Bosque">El Bosque</option>
+                            <option value="El Monte">El Monte</option>
+                            <option value="Estación Central">Estación Central</option>
+                            <option value="Huechuraba">Huechuraba</option>
+                            <option value="Independencia">Independencia</option>
+                            <option value="Isla de Maipo">Isla de Maipo</option>
+                            <option value="La Cisterna">La Cisterna</option>
+                            <option value="La Florida">La Florida</option>
+                            <option value="La Granja">La Granja</option>
+                            <option value="La Pintana">La Pintana</option>
+                            <option value="La Reina">La Reina</option>
+                            <option value="Lampa">Lampa</option>
+                            <option value="Las Condes">Las Condes</option>
+                            <option value="Lo Barnechea">Lo Barnechea</option>
+                            <option value="Lo Espejo">Lo Espejo</option>
+                            <option value="Lo Prado">Lo Prado</option>
+                            <option value="Macul">Macul</option>
+                            <option value="Maipú">Maipú</option>
+                            <option value="María Pinto">María Pinto</option>
+                            <option value="Melipilla">Melipilla</option>
+                            <option value="Ñuñoa">Ñuñoa</option>
+                            <option value="Padre Hurtado">Padre Hurtado</option>
+                            <option value="Paine">Paine</option>
+                            <option value="Pedro Aguirre Cerda">Pedro Aguirre Cerda</option>
+                            <option value="Peñaflor">Peñaflor</option>
+                            <option value="Peñalolén">Peñalolén</option>
+                            <option value="Pirque">Pirque</option>
+                            <option value="Providencia">Providencia</option>
+                            <option value="Pudahuel">Pudahuel</option>
+                            <option value="Puente Alto">Puente Alto</option>
+                            <option value="Quilicura">Quilicura</option>
+                            <option value="Quinta Normal">Quinta Normal</option>
+                            <option value="Recoleta">Recoleta</option>
+                            <option value="Renca">Renca</option>
+                            <option value="San Bernardo">San Bernardo</option>
+                            <option value="San Joaquín">San Joaquín</option>
+                            <option value="San José de Maipo">San José de Maipo</option>
+                            <option value="San Miguel">San Miguel</option>
+                            <option value="San Pedro">San Pedro</option>
+                            <option value="San Ramón">San Ramón</option>
+                            <option value="Santiago">Santiago (Comuna Central)</option>
+                            <option value="Talagante">Talagante</option>
+                            <option value="Tiltil">Tiltil</option>
+                            <option value="Vitacura">Vitacura</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 4: DATOS DE LA MADRE -->
+            <div class="card mb-4">
+                <div class="card-header">4. Datos de la Madre</div>
+                <div class="card-body row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">RUT</label>
+                        <input type="text" class="form-control rut-input" id="madreRut">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Nombres</label>
+                        <input type="text" class="form-control text-uppercase" id="madreNombres">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Apellidos</label>
+                        <input type="text" class="form-control text-uppercase" id="madreApellidos">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Teléfono / Celular</label>
+                        <input type="text" class="form-control" id="madreTelefono">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Dirección (Calle, Número) *</label>
+                        <input type="text" class="form-control text-uppercase" id="madreDireccion" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Comuna *</label>
+                        <select class="form-select" id="madreComuna" required>
+                            <option value="">Seleccione su comuna</option>
+                            <option value="Alhué">Alhué</option>
+                            <option value="Buin">Buin</option>
+                            <option value="Calera de Tango">Calera de Tango</option>
+                            <option value="Cerrillos">Cerrillos</option>
+                            <option value="Cerro Navia">Cerro Navia</option>
+                            <option value="Colina">Colina</option>
+                            <option value="Conchalí">Conchalí</option>
+                            <option value="Curacaví">Curacaví</option>
+                            <option value="El Bosque">El Bosque</option>
+                            <option value="El Monte">El Monte</option>
+                            <option value="Estación Central">Estación Central</option>
+                            <option value="Huechuraba">Huechuraba</option>
+                            <option value="Independencia">Independencia</option>
+                            <option value="Isla de Maipo">Isla de Maipo</option>
+                            <option value="La Cisterna">La Cisterna</option>
+                            <option value="La Florida">La Florida</option>
+                            <option value="La Granja">La Granja</option>
+                            <option value="La Pintana">La Pintana</option>
+                            <option value="La Reina">La Reina</option>
+                            <option value="Lampa">Lampa</option>
+                            <option value="Las Condes">Las Condes</option>
+                            <option value="Lo Barnechea">Lo Barnechea</option>
+                            <option value="Lo Espejo">Lo Espejo</option>
+                            <option value="Lo Prado">Lo Prado</option>
+                            <option value="Macul">Macul</option>
+                            <option value="Maipú">Maipú</option>
+                            <option value="María Pinto">María Pinto</option>
+                            <option value="Melipilla">Melipilla</option>
+                            <option value="Ñuñoa">Ñuñoa</option>
+                            <option value="Padre Hurtado">Padre Hurtado</option>
+                            <option value="Paine">Paine</option>
+                            <option value="Pedro Aguirre Cerda">Pedro Aguirre Cerda</option>
+                            <option value="Peñaflor">Peñaflor</option>
+                            <option value="Peñalolén">Peñalolén</option>
+                            <option value="Pirque">Pirque</option>
+                            <option value="Providencia">Providencia</option>
+                            <option value="Pudahuel">Pudahuel</option>
+                            <option value="Puente Alto">Puente Alto</option>
+                            <option value="Quilicura">Quilicura</option>
+                            <option value="Quinta Normal">Quinta Normal</option>
+                            <option value="Recoleta">Recoleta</option>
+                            <option value="Renca">Renca</option>
+                            <option value="San Bernardo">San Bernardo</option>
+                            <option value="San Joaquín">San Joaquín</option>
+                            <option value="San José de Maipo">San José de Maipo</option>
+                            <option value="San Miguel">San Miguel</option>
+                            <option value="San Pedro">San Pedro</option>
+                            <option value="San Ramón">San Ramón</option>
+                            <option value="Santiago">Santiago (Comuna Central)</option>
+                            <option value="Talagante">Talagante</option>
+                            <option value="Tiltil">Tiltil</option>
+                            <option value="Vitacura">Vitacura</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 5: DATOS DEL PADRE -->
+            <div class="card mb-4">
+                <div class="card-header">5. Datos del Padre</div>
+                <div class="card-body row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">RUT</label>
+                        <input type="text" class="form-control rut-input" id="padreRut">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Nombres</label>
+                        <input type="text" class="form-control text-uppercase" id="padreNombres">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Apellidos</label>
+                        <input type="text" class="form-control text-uppercase" id="padreApellidos">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Teléfono / Celular</label>
+                        <input type="text" class="form-control" id="padreTelefono">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Dirección (Calle, Número) *</label>
+                        <input type="text" class="form-control text-uppercase" id="padreDireccion" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Comuna *</label>
+                        <select class="form-select" id="padreComuna" required>
+                            <option value="">Seleccione su comuna</option>
+                            <option value="Alhué">Alhué</option>
+                            <option value="Buin">Buin</option>
+                            <option value="Calera de Tango">Calera de Tango</option>
+                            <option value="Cerrillos">Cerrillos</option>
+                            <option value="Cerro Navia">Cerro Navia</option>
+                            <option value="Colina">Colina</option>
+                            <option value="Conchalí">Conchalí</option>
+                            <option value="Curacaví">Curacaví</option>
+                            <option value="El Bosque">El Bosque</option>
+                            <option value="El Monte">El Monte</option>
+                            <option value="Estación Central">Estación Central</option>
+                            <option value="Huechuraba">Huechuraba</option>
+                            <option value="Independencia">Independencia</option>
+                            <option value="Isla de Maipo">Isla de Maipo</option>
+                            <option value="La Cisterna">La Cisterna</option>
+                            <option value="La Florida">La Florida</option>
+                            <option value="La Granja">La Granja</option>
+                            <option value="La Pintana">La Pintana</option>
+                            <option value="La Reina">La Reina</option>
+                            <option value="Lampa">Lampa</option>
+                            <option value="Las Condes">Las Condes</option>
+                            <option value="Lo Barnechea">Lo Barnechea</option>
+                            <option value="Lo Espejo">Lo Espejo</option>
+                            <option value="Lo Prado">Lo Prado</option>
+                            <option value="Macul">Macul</option>
+                            <option value="Maipú">Maipú</option>
+                            <option value="María Pinto">María Pinto</option>
+                            <option value="Melipilla">Melipilla</option>
+                            <option value="Ñuñoa">Ñuñoa</option>
+                            <option value="Padre Hurtado">Padre Hurtado</option>
+                            <option value="Paine">Paine</option>
+                            <option value="Pedro Aguirre Cerda">Pedro Aguirre Cerda</option>
+                            <option value="Peñaflor">Peñaflor</option>
+                            <option value="Peñalolén">Peñalolén</option>
+                            <option value="Pirque">Pirque</option>
+                            <option value="Providencia">Providencia</option>
+                            <option value="Pudahuel">Pudahuel</option>
+                            <option value="Puente Alto">Puente Alto</option>
+                            <option value="Quilicura">Quilicura</option>
+                            <option value="Quinta Normal">Quinta Normal</option>
+                            <option value="Recoleta">Recoleta</option>
+                            <option value="Renca">Renca</option>
+                            <option value="San Bernardo">San Bernardo</option>
+                            <option value="San Joaquín">San Joaquín</option>
+                            <option value="San José de Maipo">San José de Maipo</option>
+                            <option value="San Miguel">San Miguel</option>
+                            <option value="San Pedro">San Pedro</option>
+                            <option value="San Ramón">San Ramón</option>
+                            <option value="Santiago">Santiago (Comuna Central)</option>
+                            <option value="Talagante">Talagante</option>
+                            <option value="Tiltil">Tiltil</option>
+                            <option value="Vitacura">Vitacura</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 6: PERSONA AUTORIZADA PARA RETIRAR A LA ESTUDIANTE -->
+            <div class="card mb-4">
+                <div class="card-header">6. Persona Autorizada para Retirar a la Estudiante</div>
+                <div class="card-body row g-3">
+                    <div class="col-12 mb-2">
+                        <p class="text-muted small mb-0">Indique los datos del adulto responsable de retirar a la
+                            estudiante al finalizar la jornada escolar. Si se retira en transporte escolar por favor
+                            indique los datos del conductor.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">RUT *</label>
+                        <input type="text" class="form-control rut-input" id="retiraRut" required>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label">Nombres y Apellidos *</label>
+                        <input type="text" class="form-control text-uppercase" id="retiraNombreCompleto" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Parentesco *</label>
+                        <select class="form-select" id="retiraParentesco" required>
+                            <option value="">Seleccione un parentesco</option>
+                            <option value="MAMA">MAMÁ / MADRE</option>
+                            <option value="PAPA">PAPÁ / PADRE</option>
+                            <option value="ABUELO/ABUELA">ABUELO/ABUELA</option>
+                            <option value="TIO/TIA">TÍO/TÍA</option>
+                            <option value="HERMANO/A">HERMANO/A</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Teléfono / Celular *</label>
+                        <input type="text" class="form-control" id="retiraTelefono" required>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SECCIÓN 7: INFORMACIÓN MÉDICA -->
+            <div class="card mb-4">
+                <div class="card-header">7. Información Médica</div>
+                <div class="card-body row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">¿Presenta Alergias? *</label>
+                        <select class="form-select" id="esAlergica" required>
+                            <option value="">Seleccione...</option>
+                            <option value="false">No</option>
+                            <option value="true">Sí</option>
+                        </select>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label">Detalle de Alergias</label>
+                        <input type="text" class="form-control text-uppercase" id="detalleAlergias"
+                            placeholder="Especifique alergias (ej. Medicamentos, Alimentos, Polen)" disabled>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">¿Toma Medicamento Permanente? *</label>
+                        <select class="form-select" id="tomaMedicamentos" required>
+                            <option value="">Seleccione...</option>
+                            <option value="false">No</option>
+                            <option value="true">Sí</option>
+                        </select>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label">Detalle de Medicamentos y Dosis</label>
+                        <input type="text" class="form-control text-uppercase" id="detalleMedicamentos"
+                            placeholder="Especifique nombre del medicamento, dosis y horarios" disabled>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Condición Médica Adicional / Diagnósticos</label>
+                        <textarea class="form-control text-uppercase" id="condicionMedicaAdicional" rows="2"
+                            placeholder="Indique alguna condición médica, diagnóstico o cuidado especial (ej. Asma, Diabetes, Epilepsia, TDAH, etc.)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTONES ACCIÓN -->
+            <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                <a href="admin.html" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary px-4">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const idMatricula = new URLSearchParams(window.location.search).get('id');
+
+        /**
+         * Asigna valor a un campo HTML. Si es un <select>, realiza una búsqueda 
+         * insensible a mayúsculas/minúsculas para garantizar la pre-selección correcta.
+         */
+        function setVal(id, val) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const cleanVal = (val !== null && val !== undefined) ? String(val).trim() : '';
+
+    if (el.tagName === 'SELECT') {
+        el.value = cleanVal;
+
+        // Si no seleccionó nada por diferencia de tildes o formato (ej. MAMÁ vs MAMA, MADRE vs MAMA)
+        if (cleanVal && el.selectedIndex <= 0) {
+            // Función auxiliar para quitar tildes y normalizar
+            const normalizeStr = (str) => 
+                str.normalize("NFD")
+                   .replace(/[\u0300-\u036f]/g, "")
+                   .toUpperCase()
+                   .replace("MADRE", "MAMA")
+                   .replace("PADRE", "PAPA");
+
+            const targetVal = normalizeStr(cleanVal);
+
+            for (let i = 0; i < el.options.length; i++) {
+                const optVal = normalizeStr(el.options[i].value);
+                if (optVal === targetVal) {
+                    el.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+    } else {
+        el.value = cleanVal;
+    }
+}
+
+        function getVal(id) {
+            const el = document.getElementById(id);
+            return el ? el.value : '';
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!idMatricula) {
+                alert('Matrícula no encontrada.');
+                window.location.href = 'admin.html';
+                return;
+            }
+
+            try {
+                const res = await fetch(`/api/matriculas/${idMatricula}`);
+                if (!res.ok) throw new Error('Error al cargar la matrícula');
+                const m = await res.json();
+
+                // Folio y Curso
+                const txtFolioEl = document.getElementById('txtFolio');
+                if (txtFolioEl) txtFolioEl.innerText = m.numeroMatricula || '---';
+                setVal('cursoActual', m.cursoActual);
+
+                // Alumna
+                const alu = m.alumna || {};
+                setVal('alumnaNombres', alu.nombres);
+                setVal('alumnaApellidoP', alu.apellidoPaterno);
+                setVal('alumnaApellidoM', alu.apellidoMaterno);
+                setVal('alumnaRut', alu.rut);
+                setVal('alumnaFechaNac', alu.fechaNacimiento);
+                setVal('alumnaViveCon', alu.viveCon);
+                setVal('alumnaDireccion', alu.direccion);
+                setVal('alumnaComuna', alu.comuna);
+
+                // Apoderado 1
+                const apo1 = m.apoderadoTitular || {};
+                setVal('apoNombres', apo1.nombres);
+                setVal('apoApellidos', apo1.apellidos);
+                setVal('apoRut', apo1.rut);
+                setVal('apoParentesco', apo1.parentesco);
+                setVal('apoTelefono', apo1.telefono);
+                setVal('apoCorreo', apo1.correo);
+                setVal('apoDireccion', apo1.direccion);
+                setVal('apoComuna', apo1.comuna);
+
+                // Apoderado 2
+                const apo2 = m.apoderadoSuplente || {};
+                setVal('apoNombres2', apo2.nombres);
+                setVal('apoApellidos2', apo2.apellidos);
+                setVal('apoRut2', apo2.rut);
+                setVal('apoParentesco2', apo2.parentesco);
+                setVal('apoTelefono2', apo2.telefono);
+                setVal("apoCorreo2", apo2.correo);
+                setVal('apoDireccion2', apo2.direccion);
+                setVal('apoComuna2', apo2.comuna);
+
+                // Madre
+                const madre = m.madre || {};
+                setVal('madreRut', madre.rut);
+                setVal('madreNombres', madre.nombres);
+                setVal('madreApellidos', madre.apellidos);
+                setVal('madreTelefono', madre.telefono1 || madre.telefono);
+                setVal('madreDireccion', madre.direccion);
+                setVal('madreComuna', madre.comuna);
+
+                // Padre
+                const padre = m.padre || {};
+                setVal('padreRut', padre.rut);
+                setVal('padreNombres', padre.nombres);
+                setVal('padreApellidos', padre.apellidos);
+                setVal('padreTelefono', padre.telefono1 || padre.telefono);
+                setVal('padreDireccion', padre.direccion);
+                setVal('padreComuna', padre.comuna);
+
+                // Persona Autorizada Retiro
+                const ret = m.autorizadosRetiro;
+                setVal('retiraRut', ret.rut);
+                setVal('retiraNombreCompleto', ret.nombreCompleto || ret.nombres);
+                setVal('retiraParentesco', ret.parentescoFurgon);
+                setVal('retiraTelefono', ret.telefono || ret.telefono1);
+
+                // Ficha Médica
+                const fm = m.fichaMedica || {};
+                const checkAlerg = document.getElementById('esAlergica');
+                if (checkAlerg) checkAlerg.checked = !!fm.esAlergica;
+                setVal("esAlergica", fm.esAlergica);
+                setVal('detalleAlergias', fm.detalleAlergias);
+
+                const checkMed = document.getElementById('tomaMedicamentos');
+                if (checkMed) checkMed.checked = !!fm.tomaMedicamentos;
+                setVal("tomaMedicamentos",fm.tomaMedicamentos)
+                setVal('detalleMedicamentos', fm.detalleMedicamentos);
+                setVal('condicionMedicaAdicional', fm.condicionMedicaAdicional);
+
+            } catch (err) {
+                console.error("Error al cargar ficha:", err);
+                alert('Error al obtener los datos de la matrícula.');
+            }
+        });
+
+        document.getElementById('formEditar').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const dto = {
+                cursoActual: getVal('cursoActual'),
+                alumna: {
+                    nombres: getVal('alumnaNombres'),
+                    apellidoPaterno: getVal('alumnaApellidoP'),
+                    apellidoMaterno: getVal('alumnaApellidoM'),
+                    rut: getVal('alumnaRut'),
+                    fechaNacimiento: getVal('alumnaFechaNac'),
+                    viveCon: getVal('alumnaViveCon'),
+                    direccion: getVal('alumnaDireccion'),
+                    comuna: getVal('alumnaComuna')
+                },
+                apoderadoTitular: {
+                    nombres: getVal('apoNombres'),
+                    apellidos: getVal('apoApellidos'),
+                    rut: getVal('apoRut'),
+                    parentesco: getVal('apoParentesco'),
+                    telefono1: getVal('apoTel'),
+                    correoElectronico: getVal('apoCorreo'),
+                    direccion: getVal('apoDireccion'),
+                    comuna: getVal('apoComuna')
+                },
+                apoderadoSuplente: {
+                    nombres: getVal('apoNombres2'),
+                    apellidos: getVal('apoApellidos2'),
+                    rut: getVal('apoRut2'),
+                    parentesco: getVal('apoParentesco2'),
+                    telefono1: getVal('apoTel2'),
+                    direccion: getVal('apoDireccion2'),
+                    comuna: getVal('apoComuna2')
+                },
+                madre: {
+                    rut: getVal('madreRut'),
+                    nombres: getVal('madreNombres'),
+                    apellidos: getVal('madreApellidos'),
+                    telefono1: getVal('madreTelefono'),
+                    direccion: getVal('madreDireccion'),
+                    comuna: getVal('madreComuna')
+                },
+                padre: {
+                    rut: getVal('padreRut'),
+                    nombres: getVal('padreNombres'),
+                    apellidos: getVal('padreApellidos'),
+                    telefono1: getVal('padreTelefono'),
+                    direccion: getVal('padreDireccion'),
+                    comuna: getVal('padreComuna')
+                },
+                personaAutorizadaRetiro: {
+                    rut: getVal('retiraRut'),
+                    nombreCompleto: getVal('retiraNombreCompleto'),
+                    parentesco: getVal('retiraParentesco'),
+                    telefono: getVal('retiraTelefono')
+                },
+                fichaMedica: {
+                    esAlergica: document.getElementById('medAlergica') ? document.getElementById('medAlergica').checked : false,
+                    detalleAlergias: getVal('medAlergiasDetalle'),
+                    tomaMedicamentos: document.getElementById('medMedicamentos') ? document.getElementById('medMedicamentos').checked : false,
+                    detalleMedicamentos: getVal('medMedicamentosDetalle'),
+                    condicionMedicaAdicional: getVal('medCondicion')
+                }
+            };
+
+            try {
+                const res = await fetch(`/api/matriculas/${idMatricula}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dto)
+                });
+
+                if (res.ok) {
+                    alert('Ficha actualizada correctamente.');
+                    window.location.href = 'admin.html';
+                } else {
+                    const errorData = await res.json();
+                    alert('Error al actualizar: ' + (errorData.mensaje || 'Error del servidor'));
+                }
+            } catch (err) {
+                alert('Error de conexión al actualizar la ficha.');
+            }
+        });
+    </script>
+</body>
+
+</html>
