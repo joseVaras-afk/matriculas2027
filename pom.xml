@@ -110,7 +110,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-				<mainClass>com.Matricula2027.Matricula2027Application</mainClass>
+				<mainClass>com.Matricula2027.matricula2027.Matricula2027Application</mainClass>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
