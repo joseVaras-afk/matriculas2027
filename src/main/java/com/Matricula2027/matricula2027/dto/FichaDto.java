@@ -1,5 +1,7 @@
 package com.Matricula2027.matricula2027.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Data
@@ -7,6 +9,7 @@ public class FichaDto {
 
     private String curso;
     private String correoComprobante;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private String fechaHoraRegistro;
     private String numeroMatricula;
     private String curso2027;

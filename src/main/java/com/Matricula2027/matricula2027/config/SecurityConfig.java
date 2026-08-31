@@ -18,35 +18,41 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
+            .csrf(csrf -> csrf.disable()) // Ajusta según tu frontend/REST API
             .authorizeHttpRequests(auth -> auth
-                // 1. Liberar automáticamente todas las carpetas estáticas estándar (static, public, resources)
-                .requestMatchers("/css/**", "/js/**", "/images/**", "/img/**", "/assets/**", "/favicon.ico").permitAll()
-
-                // 2. Rutas públicas principales y la vista de tu Login programado
-                .requestMatchers("/", "/index", "/index.html", "/login").permitAll()
-
-                // 3. Proceso público de pre-matrícula
-                .requestMatchers("/matricula/**", "/api/matriculas/registrar").permitAll()
-
-                // 4. Rutas protegidas (Panel administrativo)
+                // 1. RUTAS PÚBLICAS: Acceso libre sin login
+                .requestMatchers(
+                    "/", 
+                    "/index", 
+                    "/index.html", 
+                    "/css/**", 
+                    "/js/**", 
+                    "/images/**", 
+                    "/favicon.ico"
+                ).permitAll()
+                
+                // 2. RUTAS DE FUNCIONARIOS: Requieren inicio de sesión
+                .requestMatchers("/admin/**", "/funcionarios/**", "/api/matricula/**").authenticated()
+                
+                // 3. Cualquier otra petición no especificada requerirá autenticación
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
-                .loginPage("/login.html")              // Indica la ruta de TU vista personalizada de login
-                .loginProcessingUrl("/login")     // Endpoint que procesa el POST del formulario de login
-                .defaultSuccessUrl("/admin.html", true)
+                .loginPage("/login") // Ruta hacia la vista de login para funcionarios
+                .defaultSuccessUrl("/admin/dashboard", true) // Redirección tras login exitoso
                 .permitAll()
             )
             .logout(logout -> logout
-                .logoutSuccessUrl("/?logout")
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/") // Al cerrar sesión, vuelve al index público
                 .permitAll()
             );
 
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
