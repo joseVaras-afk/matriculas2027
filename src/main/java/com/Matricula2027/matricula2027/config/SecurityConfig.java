@@ -38,7 +38,7 @@ public class SecurityConfig {
     ).permitAll()
     
     // Rutas protegidas
-    .requestMatchers("/admin/**",
+    .requestMatchers(
         "/admin.html",
         "/admin",
         "/comprobante.html",
