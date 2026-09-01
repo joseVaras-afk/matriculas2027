@@ -46,7 +46,7 @@ public class SecurityConfig {
         "/ficha-impresion",
         "/editar-matricula.html",
         "/editar-matricula",
-        "index.html",
+        "/index.html",
         "/index"
     ).authenticated()
     .anyRequest().authenticated()
