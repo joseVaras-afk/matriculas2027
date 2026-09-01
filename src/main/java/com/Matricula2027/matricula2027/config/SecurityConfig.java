@@ -32,7 +32,17 @@ public class SecurityConfig {
     ).permitAll()
     
     // Rutas protegidas
-    .requestMatchers("/admin/**").authenticated()
+    .requestMatchers("/admin/**",
+        "/admin.html",
+        "/comprobante.html",
+        "/comprobante",
+        "/ficha-impresion.html",
+        "/ficha-impresion",
+        "/editar-matricula.html",
+        "/editar-matricula",
+        "index.html",
+        "/index"
+    ).authenticated()
     .anyRequest().authenticated()
 )
             
