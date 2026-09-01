@@ -21,12 +21,14 @@ public class SecurityConfig {
         "/", 
         "/index", 
         "/index.html", 
-        "/css/**", 
-        "/js/**", 
-        "/images/**", 
-        "/favicon.ico",
+        "/assets/**", 
+        "/assets/css/**", 
+        "/assets/js/**",
         "/webjars/**",
-        "/matricula/**"
+        "/pre-matricula.html",
+        "/pre-matricula",
+        "/login",
+        "/login.html"
     ).permitAll()
     
     // Rutas protegidas
