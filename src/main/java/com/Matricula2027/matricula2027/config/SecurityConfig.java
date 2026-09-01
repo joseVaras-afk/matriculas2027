@@ -40,14 +40,13 @@ public class SecurityConfig {
     // Rutas protegidas
     .requestMatchers("/admin/**",
         "/admin.html",
+        "/admin",
         "/comprobante.html",
         "/comprobante",
         "/ficha-impresion.html",
         "/ficha-impresion",
         "/editar-matricula.html",
-        "/editar-matricula",
-        "/index.html",
-        "/index"
+        "/editar-matricula"
     ).authenticated()
     .anyRequest().authenticated()
 )
