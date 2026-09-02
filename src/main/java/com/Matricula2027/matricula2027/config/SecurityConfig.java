@@ -39,6 +39,17 @@ public class SecurityConfig {
     
     // Rutas protegidas
     .requestMatchers(
+        "/", 
+        "/index", 
+        "/index.html", 
+        "/assets/**", 
+        "/assets/css/**", 
+        "/assets/js/**",
+        "/webjars/**",
+        "/pre-matricula.html",
+        "/pre-matricula",
+        "/login",
+        "/login.html",
         "/admin.html",
         "/admin",
         "/comprobante.html",
