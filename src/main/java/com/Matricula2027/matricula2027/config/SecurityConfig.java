@@ -44,7 +44,7 @@ public class SecurityConfig {
         "/index.html", 
         "/assets/**", 
         "/assets/css/**", 
-        "/assets/js/**",
+        "/assets/js/app.js",
         "/webjars/**",
         "/pre-matricula.html",
         "/pre-matricula",
