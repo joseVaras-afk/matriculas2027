@@ -39,7 +39,8 @@ public class SecurityConfig {
                                 "/error",
                                 "/comprobante",
                                 "/api/matriculas/**",
-                                "/api/**")
+                                "/api/**",
+                                "/enviar-comprobante")
                         .permitAll()
 
                         // Rutas protegidas

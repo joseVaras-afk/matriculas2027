@@ -141,7 +141,10 @@ document.addEventListener('DOMContentLoaded', () => {
         esAlergica.addEventListener('change', (e) => {
             const esTrue = e.target.value === 'true';
             detalleAlergias.disabled = !esTrue;
-            if (!esTrue) detalleAlergias.value = '';
+            if (!esTrue) {
+                detalleAlergias.value = '';
+                detalleAlergias.classList.remove('is-invalid');
+            }
         });
     }
 
@@ -149,7 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
         tomaMedicamentos.addEventListener('change', (e) => {
             const esTrue = e.target.value === 'true';
             detalleMedicamentos.disabled = !esTrue;
-            if (!esTrue) detalleMedicamentos.value = '';
+            if (!esTrue) {
+                detalleMedicamentos.value = '';
+                detalleMedicamentos.classList.remove('is-invalid');
+            }
         });
     }
 
@@ -178,40 +184,69 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function procesarCampoRut(input) {
-        if (!input || input.value.trim() === '') {
-            if (input) input.classList.remove('is-invalid');
+        if (!input) return true;
+        const valor = input.value.trim();
+
+        // Campo vacío sin atributo required
+        if (valor === '' && !input.hasAttribute('required')) {
+            input.classList.remove('is-invalid', 'is-valid');
             return true;
         }
-        input.value = formatearRut(input.value);
+
+        // Campo vacío con atributo required
+        if (valor === '' && input.hasAttribute('required')) {
+            input.classList.add('is-invalid');
+            input.classList.remove('is-valid');
+            return false;
+        }
+
+        input.value = formatearRut(valor);
         const esValido = validarRut(input.value);
+
         if (!esValido) {
             input.classList.add('is-invalid');
+            input.classList.remove('is-valid');
         } else {
             input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
         }
         return esValido;
     }
 
     document.querySelectorAll('.rut-input').forEach(input => {
         input.addEventListener('blur', () => procesarCampoRut(input));
+        input.addEventListener('input', () => {
+            if (input.classList.contains('is-invalid')) {
+                procesarCampoRut(input);
+            }
+        });
     });
 
     // --- ENVÍO DEL FORMULARIO ---
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Validar únicamente campos con valor ingresado
+        // 1. Activar la validación visual nativa de Bootstrap (marca campos vacíos con 'required')
+        form.classList.add('was-validated');
+
+        // 2. Validar los campos de RUT
         let hayRutInvalido = false;
         document.querySelectorAll('.rut-input').forEach(input => {
-            if (input.value.trim() !== '') {
+            if (input.hasAttribute('required') || input.value.trim() !== '') {
                 const valido = procesarCampoRut(input);
                 if (!valido) hayRutInvalido = true;
             }
         });
 
-        if (hayRutInvalido || document.querySelectorAll('.is-invalid').length > 0) {
-            alert("Atención: Hay uno o más RUTs con dígito verificador o formato incorrecto (marcados en rojo).");
-            return;
+        // 3. Verificar si existen errores de formulario HTML5 o de validación personalizada de RUT
+        if (!form.checkValidity() || hayRutInvalido || document.querySelectorAll('.is-invalid').length > 0) {
+            // Desplazar la pantalla automáticamente al primer elemento con error
+            const primerError = form.querySelector(':invalid, .is-invalid');
+            if (primerError) {
+                primerError.focus();
+                primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return; // Detiene el envío
         }
 
         const fechaStr = new Date().toISOString();
@@ -293,14 +328,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            // Intento 1: /api/matriculas
             let respuesta = await fetch('/api/matriculas', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
 
-            // Reintento en singular si devuelve 404 Not Found
             if (respuesta.status === 404) {
                 respuesta = await fetch('/api/matricula', {
                     method: 'POST',
