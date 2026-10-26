@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- REFERENCIAS DEL DOM ---
-    // Apoderado Titular (Apoderado 1)
     const checkMadreApo1 = getEl('checkMadreEsApoderado');
     const checkPadreApo1 = getEl('checkPadreEsApoderado');
     const apo1 = {
@@ -26,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         comuna: getEl('apoComuna')
     };
 
-    // Apoderado Suplente (Apoderado 2)
     const checkMadreApo2 = getEl('checkMadreEsApoderado2');
     const checkPadreApo2 = getEl('checkPadreEsApoderado2');
     const apo2 = {
@@ -40,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         comuna: getEl('apoComuna2')
     };
 
-    // Madre
     const madre = {
         rut: getEl('madreRut'),
         nombres: getEl('madreNombres'),
@@ -50,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         comuna: getEl('madreComuna')
     };
 
-    // Padre
     const padre = {
         rut: getEl('padreRut'),
         nombres: getEl('padreNombres'),
@@ -60,14 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
         comuna: getEl('padreComuna')
     };
 
-    // Salud y Retiro
     const esAlergica = getEl('esAlergica');
     const detalleAlergias = getEl('detalleAlergias');
     const tomaMedicamentos = getEl('tomaMedicamentos');
     const detalleMedicamentos = getEl('detalleMedicamentos');
     const btnEnviar = getEl('btnEnviar');
 
-    // --- LÓGICA DE COPIA Y SINCRONIZACIÓN ---
+    // --- SINCRONIZACIÓN MADRE/PADRE -> APODERADOS ---
     function copyData(src, dst) {
         if (!src || !dst) return;
         if (src.rut && dst.rut) dst.rut.value = src.rut.value;
@@ -78,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (src.comuna && dst.comuna) dst.comuna.value = src.comuna.value;
     }
 
-    // Determina la dirección de la copia según cuál objeto tenga datos
     function smartCopy(objA, objB) {
         const aHasContent = (objA.rut && objA.rut.value) || (objA.nombres && objA.nombres.value);
         const bHasContent = (objB.rut && objB.rut.value) || (objB.nombres && objB.nombres.value);
@@ -91,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function syncForm(triggerSource) {
-        // Apo 1 - Madre
         if (checkMadreApo1 && checkMadreApo1.checked) {
             if (checkPadreApo1) checkPadreApo1.checked = false;
             if (checkMadreApo2) checkMadreApo2.checked = false;
@@ -102,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
             else smartCopy(apo1, madre);
         }
 
-        // Apo 1 - Padre
         if (checkPadreApo1 && checkPadreApo1.checked) {
             if (checkMadreApo1) checkMadreApo1.checked = false;
             if (checkPadreApo2) checkPadreApo2.checked = false;
@@ -113,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
             else smartCopy(apo1, padre);
         }
 
-        // Apo 2 - Madre
         if (checkMadreApo2 && checkMadreApo2.checked) {
             if (checkPadreApo2) checkPadreApo2.checked = false;
             if (checkMadreApo1) checkMadreApo1.checked = false;
@@ -124,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
             else smartCopy(apo2, madre);
         }
 
-        // Apo 2 - Padre
         if (checkPadreApo2 && checkPadreApo2.checked) {
             if (checkMadreApo2) checkMadreApo2.checked = false;
             if (checkPadreApo1) checkPadreApo1.checked = false;
@@ -136,13 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Escuchadores de cambio en Checkboxes
     if (checkMadreApo1) checkMadreApo1.addEventListener('change', () => syncForm('check'));
     if (checkPadreApo1) checkPadreApo1.addEventListener('change', () => syncForm('check'));
     if (checkMadreApo2) checkMadreApo2.addEventListener('change', () => syncForm('check'));
     if (checkPadreApo2) checkPadreApo2.addEventListener('change', () => syncForm('check'));
 
-    // Escuchadores de escritura en campos
     Object.values(apo1).filter(Boolean).forEach(el => el.addEventListener('input', () => syncForm('apo1')));
     Object.values(apo2).filter(Boolean).forEach(el => el.addEventListener('input', () => syncForm('apo2')));
     Object.values(madre).filter(Boolean).forEach(el => el.addEventListener('input', () => syncForm('madre')));
@@ -189,27 +177,40 @@ document.addEventListener('DOMContentLoaded', () => {
         return (S ? String(S - 1) : 'k') === digv;
     }
 
+    function procesarCampoRut(input) {
+        if (input.value.trim() === '') {
+            input.classList.remove('is-invalid');
+            return true;
+        }
+        input.value = formatearRut(input.value);
+        const esValido = validarRut(input.value);
+        if (!esValido) {
+            input.classList.add('is-invalid');
+        } else {
+            input.classList.remove('is-invalid');
+        }
+        return esValido;
+    }
+
     document.querySelectorAll('.rut-input').forEach(input => {
-        input.addEventListener('blur', function () {
-            if (this.value.trim() === '') {
-                this.classList.remove('is-invalid');
-                return;
-            }
-            this.value = formatearRut(this.value);
-            if (!validarRut(this.value)) {
-                this.classList.add('is-invalid');
-            } else {
-                this.classList.remove('is-invalid');
-            }
-        });
+        input.addEventListener('blur', () => procesarCampoRut(input));
     });
 
     // --- ENVÍO DEL FORMULARIO ---
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        if (document.querySelectorAll('.is-invalid').length > 0) {
-            alert("Por favor, corrija los campos marcados en rojo (RUTs inválidos) antes de enviar.");
+        // Validar todos los campos de RUT antes de enviar
+        let hayRutInvalido = false;
+        document.querySelectorAll('.rut-input').forEach(input => {
+            if (input.value.trim() !== '') {
+                const valido = procesarCampoRut(input);
+                if (!valido) hayRutInvalido = true;
+            }
+        });
+
+        if (hayRutInvalido || document.querySelectorAll('.is-invalid').length > 0) {
+            alert("Atención: Hay uno o más RUTs con formato/dígito verificador incorrecto. Por favor corríjalos (marcados en rojo).");
             return;
         }
 
@@ -248,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 comuna: getVal('apoComuna'),
                 esMismoQueApoderado: (checkMadreApo1 && checkMadreApo1.checked) || (checkPadreApo1 && checkPadreApo1.checked)
             },
-            apoderadoSuplente: {
+            apoderadoSuplente: getVal('apoRut2') ? {
                 rut: getVal('apoRut2'),
                 nombres: getVal('apoNombres2'),
                 apellidos: getVal('apoApellidos2'),
@@ -258,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 direccion: getVal('apoDireccion2'),
                 comuna: getVal('apoComuna2'),
                 esMismoQueApoderado: (checkMadreApo2 && checkMadreApo2.checked) || (checkPadreApo2 && checkPadreApo2.checked)
-            },
+            } : null,
             madre: getVal('madreRut') ? {
                 rut: getVal('madreRut'),
                 nombres: getVal('madreNombres'),
