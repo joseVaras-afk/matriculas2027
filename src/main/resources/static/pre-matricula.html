@@ -25,7 +25,7 @@
                 <div class="card-header">1. Datos de la Estudiante</div>
                 <div class="card-body row g-3">
                     <div class="col-md-4">
-                        <label class="form-label">Curso Actual (2026) *</label>
+                        <label class="form-label" for="cursoActual">Curso Actual (2026) *</label>
                         <select class="form-select" id="cursoActual" required>
                             <option value="">Seleccione un curso</option>
                             <option value="PRE-KINDER A">PRE-KINDER A</option>
@@ -61,33 +61,33 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">RUT / IPE Estudiante *</label>
+                        <label class="form-label" for="alumnaRut">RUT / IPE Estudiante *</label>
                         <input type="text" class="form-control rut-input" id="alumnaRut" placeholder="12345678-9"
                             required>
                         <div class="invalid-feedback">RUT inválido.</div>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Fecha de Nacimiento *</label>
+                        <label class="form-label" for="alumnaFechaNac">Fecha de Nacimiento *</label>
                         <input type="date" class="form-control" id="alumnaFechaNac" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Nombres *</label>
+                        <label class="form-label" for="alumnaNombres">Nombres *</label>
                         <input type="text" class="form-control text-uppercase" id="alumnaNombres" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Apellido Paterno *</label>
+                        <label class="form-label" for="alumnaApellidoP">Apellido Paterno *</label>
                         <input type="text" class="form-control text-uppercase" id="alumnaApellidoP" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Apellido Materno *</label>
+                        <label class="form-label" for="alumnaApellidoM">Apellido Materno *</label>
                         <input type="text" class="form-control text-uppercase" id="alumnaApellidoM" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Dirección (Calle, Número) *</label>
+                        <label class="form-label" for="alumnaDireccion">Dirección (Calle, Número) *</label>
                         <input type="text" class="form-control text-uppercase" id="alumnaDireccion" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Comuna *</label>
+                        <label class="form-label" for="alumnaComuna">Comuna *</label>
                         <select class="form-select" id="alumnaComuna" required>
                             <option value="">Seleccione su comuna</option>
                             <option value="ALHUE">Alhué</option>
@@ -145,7 +145,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">La alumna vive con: *</label>
+                        <label class="form-label" for="alumnaViveCon">La alumna vive con: *</label>
                         <select class="form-select" id="alumnaViveCon" required>
                             <option value="">Seleccione...</option>
                             <option value="LA MADRE">LA MADRE</option>
@@ -179,19 +179,19 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">RUT *</label>
+                        <label class="form-label" for="apoRut">RUT *</label>
                         <input type="text" class="form-control rut-input" id="apoRut" placeholder="12345678-9" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Nombres *</label>
+                        <label class="form-label" for="apoNombres">Nombres *</label>
                         <input type="text" class="form-control text-uppercase" id="apoNombres" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Apellidos *</label>
+                        <label class="form-label" for="apoApellidos">Apellidos *</label>
                         <input type="text" class="form-control text-uppercase" id="apoApellidos" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Parentesco *</label>
+                        <label class="form-label" for="apoParentesco">Parentesco *</label>
                         <select class="form-select" id="apoParentesco" required>
                             <option value="">Seleccione un parentesco</option>
                             <option value="MAMA">MAMA</option>
@@ -202,19 +202,19 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Teléfono / Celular *</label>
+                        <label class="form-label" for="apoTelefono">Teléfono / Celular *</label>
                         <input type="text" class="form-control" id="apoTelefono" placeholder="912345678" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Correo Electrónico *</label>
+                        <label class="form-label" for="apoCorreo">Correo Electrónico *</label>
                         <input type="email" class="form-control" id="apoCorreo" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Dirección (Calle, Número) *</label>
+                        <label class="form-label" for="apoDireccion">Dirección (Calle, Número) *</label>
                         <input type="text" class="form-control text-uppercase" id="apoDireccion" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Comuna *</label>
+                        <label class="form-label" for="apoComuna">Comuna *</label>
                         <select class="form-select" id="apoComuna" required>
                             <option value="">Seleccione su comuna</option>
                             <option value="ALHUE">Alhué</option>
@@ -274,9 +274,9 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 3: APODERADO 2 -->
+            <!-- SECCIÓN 3: APODERADO 2 (SUPLENTE) -->
             <div class="card mb-4">
-                <div class="card-header">3. Apoderado 2</div>
+                <div class="card-header">3. Apoderado 2 (Suplente)</div>
                 <div class="card-body row g-3">
                     <div class="col-12 border-bottom pb-2 mb-2">
                         <div class="form-check form-check-inline">
@@ -295,21 +295,20 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">RUT *</label>
-                        <input type="text" class="form-control rut-input" id="apoRut2" placeholder="12345678-9"
-                            required>
+                        <label class="form-label" for="apoRut2">RUT</label>
+                        <input type="text" class="form-control rut-input" id="apoRut2" placeholder="12345678-9">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Nombres *</label>
-                        <input type="text" class="form-control text-uppercase" id="apoNombres2" required>
+                        <label class="form-label" for="apoNombres2">Nombres</label>
+                        <input type="text" class="form-control text-uppercase" id="apoNombres2">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Apellidos *</label>
-                        <input type="text" class="form-control text-uppercase" id="apoApellidos2" required>
+                        <label class="form-label" for="apoApellidos2">Apellidos</label>
+                        <input type="text" class="form-control text-uppercase" id="apoApellidos2">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Parentesco *</label>
-                        <select class="form-select" id="apoParentesco2" required>
+                        <label class="form-label" for="apoParentesco2">Parentesco</label>
+                        <select class="form-select" id="apoParentesco2">
                             <option value="">Seleccione un parentesco</option>
                             <option value="MAMA">MAMA</option>
                             <option value="PAPA">PAPA</option>
@@ -319,20 +318,20 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Teléfono / Celular *</label>
-                        <input type="text" class="form-control" id="apoTelefono2" placeholder="912345678" required>
+                        <label class="form-label" for="apoTelefono2">Teléfono / Celular</label>
+                        <input type="text" class="form-control" id="apoTelefono2" placeholder="912345678">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Correo Electrónico *</label>
-                        <input type="email" class="form-control" id="apoCorreo2" required>
+                        <label class="form-label" for="apoCorreo2">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="apoCorreo2">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Dirección (Calle, Número) *</label>
-                        <input type="text" class="form-control text-uppercase" id="apoDireccion2" required>
+                        <label class="form-label" for="apoDireccion2">Dirección (Calle, Número)</label>
+                        <input type="text" class="form-control text-uppercase" id="apoDireccion2">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Comuna *</label>
-                        <select class="form-select" id="apoComuna2" required>
+                        <label class="form-label" for="apoComuna2">Comuna</label>
+                        <select class="form-select" id="apoComuna2">
                             <option value="">Seleccione su comuna</option>
                             <option value="ALHUE">Alhué</option>
                             <option value="BUIN">Buin</option>
@@ -396,28 +395,28 @@
                 <div class="card-header">4. Datos de la Madre</div>
                 <div class="card-body row g-3">
                     <div class="col-md-4">
-                        <label class="form-label">RUT</label>
+                        <label class="form-label" for="madreRut">RUT</label>
                         <input type="text" class="form-control rut-input" id="madreRut">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Nombres</label>
+                        <label class="form-label" for="madreNombres">Nombres</label>
                         <input type="text" class="form-control text-uppercase" id="madreNombres">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Apellidos</label>
+                        <label class="form-label" for="madreApellidos">Apellidos</label>
                         <input type="text" class="form-control text-uppercase" id="madreApellidos">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Teléfono / Celular</label>
+                        <label class="form-label" for="madreTelefono">Teléfono / Celular</label>
                         <input type="text" class="form-control" id="madreTelefono">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Dirección (Calle, Número) *</label>
-                        <input type="text" class="form-control text-uppercase" id="madreDireccion" required>
+                        <label class="form-label" for="madreDireccion">Dirección (Calle, Número)</label>
+                        <input type="text" class="form-control text-uppercase" id="madreDireccion">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Comuna *</label>
-                        <select class="form-select" id="madreComuna" required>
+                        <label class="form-label" for="madreComuna">Comuna</label>
+                        <select class="form-select" id="madreComuna">
                             <option value="">Seleccione su comuna</option>
                             <option value="ALHUE">Alhué</option>
                             <option value="BUIN">Buin</option>
@@ -481,28 +480,28 @@
                 <div class="card-header">5. Datos del Padre</div>
                 <div class="card-body row g-3">
                     <div class="col-md-4">
-                        <label class="form-label">RUT</label>
+                        <label class="form-label" for="padreRut">RUT</label>
                         <input type="text" class="form-control rut-input" id="padreRut">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Nombres</label>
+                        <label class="form-label" for="padreNombres">Nombres</label>
                         <input type="text" class="form-control text-uppercase" id="padreNombres">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Apellidos</label>
+                        <label class="form-label" for="padreApellidos">Apellidos</label>
                         <input type="text" class="form-control text-uppercase" id="padreApellidos">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Teléfono / Celular</label>
+                        <label class="form-label" for="padreTelefono">Teléfono / Celular</label>
                         <input type="text" class="form-control" id="padreTelefono">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Dirección (Calle, Número) *</label>
-                        <input type="text" class="form-control text-uppercase" id="padreDireccion" required>
+                        <label class="form-label" for="padreDireccion">Dirección (Calle, Número)</label>
+                        <input type="text" class="form-control text-uppercase" id="padreDireccion">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Comuna *</label>
-                        <select class="form-select" id="padreComuna" required>
+                        <label class="form-label" for="padreComuna">Comuna</label>
+                        <select class="form-select" id="padreComuna">
                             <option value="">Seleccione su comuna</option>
                             <option value="ALHUE">Alhué</option>
                             <option value="BUIN">Buin</option>
@@ -571,15 +570,15 @@
                             indique los datos del conductor.</p>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">RUT *</label>
+                        <label class="form-label" for="retiraRut">RUT *</label>
                         <input type="text" class="form-control rut-input" id="retiraRut" required>
                     </div>
                     <div class="col-md-8">
-                        <label class="form-label">Nombres y Apellidos *</label>
+                        <label class="form-label" for="retiraNombreCompleto">Nombres y Apellidos *</label>
                         <input type="text" class="form-control text-uppercase" id="retiraNombreCompleto" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Parentesco *</label>
+                        <label class="form-label" for="retiraParentesco">Parentesco *</label>
                         <select class="form-select" id="retiraParentesco" required>
                             <option value="">Seleccione un parentesco</option>
                             <option value="MAMA">MAMA</option>
@@ -591,7 +590,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Teléfono / Celular *</label>
+                        <label class="form-label" for="retiraTelefono">Teléfono / Celular *</label>
                         <input type="text" class="form-control" id="retiraTelefono" required>
                     </div>
                 </div>
@@ -602,7 +601,7 @@
                 <div class="card-header">7. Información Médica</div>
                 <div class="card-body row g-3">
                     <div class="col-md-4">
-                        <label class="form-label">¿Presenta Alergias? *</label>
+                        <label class="form-label" for="esAlergica">¿Presenta Alergias? *</label>
                         <select class="form-select" id="esAlergica" required>
                             <option value="">Seleccione...</option>
                             <option value="false">No</option>
@@ -610,13 +609,13 @@
                         </select>
                     </div>
                     <div class="col-md-8">
-                        <label class="form-label">Detalle de Alergias</label>
+                        <label class="form-label" for="detalleAlergias">Detalle de Alergias</label>
                         <input type="text" class="form-control text-uppercase" id="detalleAlergias"
                             placeholder="Especifique alergias (ej. Medicamentos, Alimentos, Polen)" disabled>
                     </div>
 
                     <div class="col-md-4">
-                        <label class="form-label">¿Toma Medicamento Permanente? *</label>
+                        <label class="form-label" for="tomaMedicamentos">¿Toma Medicamento Permanente? *</label>
                         <select class="form-select" id="tomaMedicamentos" required>
                             <option value="">Seleccione...</option>
                             <option value="false">No</option>
@@ -624,13 +623,14 @@
                         </select>
                     </div>
                     <div class="col-md-8">
-                        <label class="form-label">Detalle de Medicamentos y Dosis</label>
+                        <label class="form-label" for="detalleMedicamentos">Detalle de Medicamentos y Dosis</label>
                         <input type="text" class="form-control text-uppercase" id="detalleMedicamentos"
                             placeholder="Especifique nombre del medicamento, dosis y horarios" disabled>
                     </div>
 
                     <div class="col-12">
-                        <label class="form-label">Condición Médica Adicional / Diagnósticos</label>
+                        <label class="form-label" for="condicionMedicaAdicional">Condición Médica Adicional /
+                            Diagnósticos</label>
                         <textarea class="form-control text-uppercase" id="condicionMedicaAdicional" rows="2"
                             placeholder="Indique alguna condición médica, diagnóstico o cuidado especial (ej. Asma, Diabetes, Epilepsia, TDAH, etc.)"></textarea>
                     </div>
