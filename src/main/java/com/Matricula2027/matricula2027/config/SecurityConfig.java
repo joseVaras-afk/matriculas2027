@@ -37,10 +37,9 @@ public class SecurityConfig {
                                 "/login.html",
                                 "/comprobante.html",
                                 "/error",
-                                "comprobante",
-                                "comprobante.html",
-                                "api/matriculas/**",
-                                "api/**")
+                                "/comprobante",
+                                "/api/matriculas/**",
+                                "/api/**")
                         .permitAll()
 
                         // Rutas protegidas
