@@ -101,12 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Sincronización de Checkboxes Madre/Padre -> Apoderados
     function copiarValores(srcRut, srcNom, srcApe, srcTel, srcDir, srcCom, destRut, destNom, destApe, destTel, destDir, destCom) {
-        if (srcRut && destRut && srcRut.value) destRut.value = srcRut.value;
-        if (srcNom && destNom && srcNom.value) destNom.value = srcNom.value;
-        if (srcApe && destApe && srcApe.value) destApe.value = srcApe.value;
-        if (srcTel && destTel && srcTel.value) destTel.value = srcTel.value;
-        if (srcDir && destDir && srcDir.value) destDir.value = srcDir.value;
-        if (srcCom && destCom && srcCom.value) destCom.value = srcCom.value;
+        if (srcRut && destRut) destRut.value = srcRut.value || '';
+        if (srcNom && destNom) destNom.value = srcNom.value || '';
+        if (srcApe && destApe) destApe.value = srcApe.value || '';
+        if (srcTel && destTel) destTel.value = srcTel.value || '';
+        if (srcDir && destDir) destDir.value = srcDir.value || '';
+        if (srcCom && destCom) destCom.value = srcCom.value || '';
     }
 
     function sincronizarFormulario() {
@@ -114,38 +114,45 @@ document.addEventListener('DOMContentLoaded', () => {
             if (checkPadreApo1) checkPadreApo1.checked = false;
             if (apoParentesco) apoParentesco.value = "MAMA";
             if (checkMadreApo2) checkMadreApo2.checked = false;
-            copiarValores(apoRut, apoNombres, apoApellidos, apoTelefono, apoDireccion, apoComuna, madreRut, madreNombres, madreApellidos, madreTelefono, madreDireccion, madreComuna);
+            // CORREGIDO: Origen (Madre) -> Destino (Apoderado 1)
+            copiarValores(madreRut, madreNombres, madreApellidos, madreTelefono, madreDireccion, madreComuna, apoRut, apoNombres, apoApellidos, apoTelefono, apoDireccion, apoComuna);
         }
 
         if (checkPadreApo1 && checkPadreApo1.checked) {
             if (checkMadreApo1) checkMadreApo1.checked = false;
             if (apoParentesco) apoParentesco.value = "PAPA";
             if (checkPadreApo2) checkPadreApo2.checked = false;
-            copiarValores(apoRut, apoNombres, apoApellidos, apoTelefono, apoDireccion, apoComuna, padreRut, padreNombres, padreApellidos, padreTelefono, padreDireccion, padreComuna);
+            // CORREGIDO: Origen (Padre) -> Destino (Apoderado 1)
+            copiarValores(padreRut, padreNombres, padreApellidos, padreTelefono, padreDireccion, padreComuna, apoRut, apoNombres, apoApellidos, apoTelefono, apoDireccion, apoComuna);
         }
 
         if (checkMadreApo2 && checkMadreApo2.checked) {
             if (checkPadreApo2) checkPadreApo2.checked = false;
             if (apoParentesco2) apoParentesco2.value = "MAMA";
             if (checkMadreApo1) checkMadreApo1.checked = false;
-            copiarValores(apoRut2, apoNombres2, apoApellidos2, apoTelefono2, apoDireccion2, apoComuna2, madreRut, madreNombres, madreApellidos, madreTelefono, madreDireccion, madreComuna);
+            // CORREGIDO: Origen (Madre) -> Destino (Apoderado 2)
+            copiarValores(madreRut, madreNombres, madreApellidos, madreTelefono, madreDireccion, madreComuna, apoRut2, apoNombres2, apoApellidos2, apoTelefono2, apoDireccion2, apoComuna2);
         }
 
         if (checkPadreApo2 && checkPadreApo2.checked) {
             if (checkMadreApo2) checkMadreApo2.checked = false;
             if (apoParentesco2) apoParentesco2.value = "PAPA";
             if (checkPadreApo1) checkPadreApo1.checked = false;
-            copiarValores(apoRut2, apoNombres2, apoApellidos2, apoTelefono2, apoDireccion2, apoComuna2, padreRut, padreNombres, padreApellidos, padreTelefono, padreDireccion, padreComuna);
+            // CORREGIDO: Origen (Padre) -> Destino (Apoderado 2)
+            copiarValores(padreRut, padreNombres, padreApellidos, padreTelefono, padreDireccion, padreComuna, apoRut2, apoNombres2, apoApellidos2, apoTelefono2, apoDireccion2, apoComuna2);
         }
     }
 
+    // Escuchar cambios en las casillas de selección
     [checkMadreApo1, checkPadreApo1, checkMadreApo2, checkPadreApo2].filter(Boolean).forEach(chk => {
         chk.addEventListener('change', sincronizarFormulario);
     });
 
-    [apoRut, apoNombres, apoApellidos, apoTelefono, apoDireccion, apoComuna, apoRut2, apoNombres2, apoApellidos2, apoTelefono2, apoDireccion2, apoComuna2].filter(Boolean).forEach(inp => {
-        inp.addEventListener('input', sincronizarFormulario);
-    });
+    // Escuchar tipeo en tiempo real sobre los campos de Madre y Padre para actualizar al Apoderado
+    [madreRut, madreNombres, madreApellidos, madreTelefono, madreDireccion, madreComuna,
+        padreRut, padreNombres, padreApellidos, padreTelefono, padreDireccion, padreComuna].filter(Boolean).forEach(inp => {
+            inp.addEventListener('input', sincronizarFormulario);
+        });
 
     // Formato y Validación de RUT
     function formatearRut(rut) {

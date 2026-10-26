@@ -35,7 +35,8 @@ public class SecurityConfig {
                                 "/pre-matricula",
                                 "/login",
                                 "/login.html",
-                                "/comprobante.html")
+                                "/comprobante.html",
+                                "/error")
                         .permitAll()
 
                         // Rutas protegidas

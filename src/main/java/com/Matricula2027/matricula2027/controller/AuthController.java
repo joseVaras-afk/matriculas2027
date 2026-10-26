@@ -19,12 +19,16 @@ public class AuthController {
         // Credenciales simples de prueba (puedes migrarlas a base de datos después)
         if ("admin".equals(usuario) && "123".equals(password)) {
             return ResponseEntity.ok(Map.of(
-                "mensaje", "Login exitoso",
-                "nombreFuncionario", "Secretaría General"
-            ));
+                    "mensaje", "Login exitoso",
+                    "nombreFuncionario", "Secretaría General"));
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(Map.of("mensaje", "Usuario o contraseña incorrectos"));
+    }
+
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login"; // Retorna la plantilla login.html
     }
 }
