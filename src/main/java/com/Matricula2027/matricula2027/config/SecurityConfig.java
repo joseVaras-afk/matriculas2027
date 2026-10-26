@@ -20,58 +20,56 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-    // Recursos estáticos y rutas públicas
-    .requestMatchers(
-        "/", 
-        "/index", 
-        "/index.html", 
-        "/assets/**", 
-        "/assets/css/**", 
-        "/assets/js/**",
-        "/webjars/**",
-        "/pre-matricula.html",
-        "/pre-matricula",
-        "/login",
-        "/login.html"
-    ).permitAll()
-    
-    // Rutas protegidas
-    .requestMatchers(
-        "/", 
-        "/index", 
-        "/index.html", 
-        "/assets/**", 
-        "/assets/css/**", 
-        "/assets/js/app.js",
-        "/webjars/**",
-        "/pre-matricula.html",
-        "/pre-matricula",
-        "/login",
-        "/login.html",
-        "/admin.html",
-        "/admin",
-        "/comprobante.html",
-        "/comprobante",
-        "/ficha-impresion.html",
-        "/ficha-impresion",
-        "/editar-matricula.html",
-        "/editar-matricula"
-    ).authenticated()
-    .anyRequest().authenticated()
-)
-            
-            .formLogin(form -> form
-                .loginPage("/login")
-                .defaultSuccessUrl("/admin.html", true)
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .permitAll()
-            );
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        // Recursos estáticos y rutas públicas
+                        .requestMatchers(
+                                "/",
+                                "/index",
+                                "/index.html",
+                                "/assets/**",
+                                "/assets/css/**",
+                                "/assets/js/**",
+                                "/webjars/**",
+                                "/pre-matricula.html",
+                                "/pre-matricula",
+                                "/login",
+                                "/login.html",
+                                "/comprobante.html")
+                        .permitAll()
+
+                        // Rutas protegidas
+                        .requestMatchers(
+                                "/",
+                                "/index",
+                                "/index.html",
+                                "/assets/**",
+                                "/assets/css/**",
+                                "/assets/js/app.js",
+                                "/webjars/**",
+                                "/pre-matricula.html",
+                                "/pre-matricula",
+                                "/login",
+                                "/login.html",
+                                "/admin.html",
+                                "/admin",
+                                "/comprobante.html",
+                                "/comprobante",
+                                "/ficha-impresion.html",
+                                "/ficha-impresion",
+                                "/editar-matricula.html",
+                                "/editar-matricula")
+                        .authenticated()
+                        .anyRequest().authenticated())
+
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/admin.html", true)
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .permitAll());
 
         return http.build();
     }

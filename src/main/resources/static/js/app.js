@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const alumnaDireccion = getEl('alumnaDireccion', 'aluDireccion');
     const alumnaComuna = getEl('alumnaComuna', 'aluComuna');
     const alumnaViveCon = getEl('alumnaViveCon', 'aluViveCon');
-    const fechaStr = data.fechaRegistro ? new Date(data.fechaRegistro).toLocaleString() : new Date().toLocaleString();
+    const fechaStr = new Date().toISOString();
 
     // Apoderado Titular (Apoderado 1)
     const checkMadreApo1 = getEl('checkMadreEsApoderado');
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
 
             apoderadoTitular: {
-                rut: getVal( 'apoRut'),
+                rut: getVal('apoRut'),
                 nombres: getVal('apoNombres'),
                 apellidos: getVal('apoApellidos'),
                 parentesco: getVal('apoParentesco'),
