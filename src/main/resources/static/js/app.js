@@ -2,159 +2,170 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('formularioMatricula');
     if (!form) return;
 
-    // Función auxiliar para buscar elementos por múltiples IDs posibles
-    function getEl(...ids) {
-        for (let id of ids) {
-            const el = document.getElementById(id);
-            if (el) return el;
-        }
-        return null;
+    function getEl(id) {
+        return document.getElementById(id);
     }
 
-    function getVal(...ids) {
-        const el = getEl(...ids);
+    function getVal(id) {
+        const el = getEl(id);
         return el ? el.value.trim() : '';
     }
 
-    // 1. Obtención flexible de referencias del DOM
-    const cursoActual = getEl('cursoActual');
-    const alumnaRut = getEl('alumnaRut', 'aluRut');
-    const alumnaFechaNac = getEl('alumnaFechaNac', 'aluFechaNac');
-    const alumnaNombres = getEl('alumnaNombres', 'aluNombres');
-    const alumnaApellidoP = getEl('alumnaApellidoP', 'aluPaterno');
-    const alumnaApellidoM = getEl('alumnaApellidoM', 'aluMaterno');
-    const alumnaDireccion = getEl('alumnaDireccion', 'aluDireccion');
-    const alumnaComuna = getEl('alumnaComuna', 'aluComuna');
-    const alumnaViveCon = getEl('alumnaViveCon', 'aluViveCon');
-    const fechaStr = new Date().toISOString();
-
+    // --- REFERENCIAS DEL DOM ---
     // Apoderado Titular (Apoderado 1)
     const checkMadreApo1 = getEl('checkMadreEsApoderado');
     const checkPadreApo1 = getEl('checkPadreEsApoderado');
-    const apoRut = getEl('apoRut');
-    const apoNombres = getEl('apoNombres');
-    const apoApellidos = getEl('apoApellidos');
-    const apoParentesco = getEl('apoParentesco');
-    const apoTelefono = getEl('apoTelefono');
-    const apoCorreo = getEl('apoCorreo');
-    const apoDireccion = getEl('apoDireccion');
-    const apoComuna = getEl('apoComuna');
+    const apo1 = {
+        rut: getEl('apoRut'),
+        nombres: getEl('apoNombres'),
+        apellidos: getEl('apoApellidos'),
+        parentesco: getEl('apoParentesco'),
+        telefono: getEl('apoTelefono'),
+        correo: getEl('apoCorreo'),
+        direccion: getEl('apoDireccion'),
+        comuna: getEl('apoComuna')
+    };
 
     // Apoderado Suplente (Apoderado 2)
     const checkMadreApo2 = getEl('checkMadreEsApoderado2');
     const checkPadreApo2 = getEl('checkPadreEsApoderado2');
-    const apoRut2 = getEl('apoRut2');
-    const apoNombres2 = getEl('apoNombres2');
-    const apoApellidos2 = getEl('apoApellidos2');
-    const apoParentesco2 = getEl('apoParentesco2');
-    const apoTelefono2 = getEl('apoTelefono2');
-    const apoCorreo2 = getEl('apoCorreo2');
-    const apoDireccion2 = getEl('apoDireccion2');
-    const apoComuna2 = getEl('apoComuna2');
+    const apo2 = {
+        rut: getEl('apoRut2'),
+        nombres: getEl('apoNombres2'),
+        apellidos: getEl('apoApellidos2'),
+        parentesco: getEl('apoParentesco2'),
+        telefono: getEl('apoTelefono2'),
+        correo: getEl('apoCorreo2'),
+        direccion: getEl('apoDireccion2'),
+        comuna: getEl('apoComuna2')
+    };
 
     // Madre
-    const madreRut = getEl('madreRut');
-    const madreNombres = getEl('madreNombres');
-    const madreApellidos = getEl('madreApellidos');
-    const madreTelefono = getEl('madreTelefono');
-    const madreDireccion = getEl('madreDireccion');
-    const madreComuna = getEl('madreComuna');
+    const madre = {
+        rut: getEl('madreRut'),
+        nombres: getEl('madreNombres'),
+        apellidos: getEl('madreApellidos'),
+        telefono: getEl('madreTelefono'),
+        direccion: getEl('madreDireccion'),
+        comuna: getEl('madreComuna')
+    };
 
     // Padre
-    const padreRut = getEl('padreRut');
-    const padreNombres = getEl('padreNombres');
-    const padreApellidos = getEl('padreApellidos');
-    const padreTelefono = getEl('padreTelefono');
-    const padreDireccion = getEl('padreDireccion');
-    const padreComuna = getEl('padreComuna');
+    const padre = {
+        rut: getEl('padreRut'),
+        nombres: getEl('padreNombres'),
+        apellidos: getEl('padreApellidos'),
+        telefono: getEl('padreTelefono'),
+        direccion: getEl('padreDireccion'),
+        comuna: getEl('padreComuna')
+    };
 
-    // Retiro y Salud
-    const retiraRut = getEl('retiraRut');
-    const retiraNombreCompleto = getEl('retiraNombreCompleto');
-    const retiraParentesco = getEl('retiraParentesco');
-    const retiraTelefono = getEl('retiraTelefono');
-
-    const esAlergica = getEl('esAlergica', 'medAlergica');
-    const detalleAlergias = getEl('detalleAlergias', 'medAlergiasDetalle');
-    const tomaMedicamentos = getEl('tomaMedicamentos', 'medMedicamentos');
-    const detalleMedicamentos = getEl('detalleMedicamentos', 'medMedicamentosDetalle');
-    const condicionMedicaAdicional = getEl('condicionMedicaAdicional', 'medCondicion');
-
+    // Salud y Retiro
+    const esAlergica = getEl('esAlergica');
+    const detalleAlergias = getEl('detalleAlergias');
+    const tomaMedicamentos = getEl('tomaMedicamentos');
+    const detalleMedicamentos = getEl('detalleMedicamentos');
     const btnEnviar = getEl('btnEnviar');
 
-    // 2. Control de habilitación de campos médicos
+    // --- LÓGICA DE COPIA Y SINCRONIZACIÓN ---
+    function copyData(src, dst) {
+        if (!src || !dst) return;
+        if (src.rut && dst.rut) dst.rut.value = src.rut.value;
+        if (src.nombres && dst.nombres) dst.nombres.value = src.nombres.value;
+        if (src.apellidos && dst.apellidos) dst.apellidos.value = src.apellidos.value;
+        if (src.telefono && dst.telefono) dst.telefono.value = src.telefono.value;
+        if (src.direccion && dst.direccion) dst.direccion.value = src.direccion.value;
+        if (src.comuna && dst.comuna) dst.comuna.value = src.comuna.value;
+    }
+
+    // Determina la dirección de la copia según cuál objeto tenga datos
+    function smartCopy(objA, objB) {
+        const aHasContent = (objA.rut && objA.rut.value) || (objA.nombres && objA.nombres.value);
+        const bHasContent = (objB.rut && objB.rut.value) || (objB.nombres && objB.nombres.value);
+
+        if (bHasContent && !aHasContent) {
+            copyData(objB, objA);
+        } else {
+            copyData(objA, objB);
+        }
+    }
+
+    function syncForm(triggerSource) {
+        // Apo 1 - Madre
+        if (checkMadreApo1 && checkMadreApo1.checked) {
+            if (checkPadreApo1) checkPadreApo1.checked = false;
+            if (checkMadreApo2) checkMadreApo2.checked = false;
+            if (apo1.parentesco) apo1.parentesco.value = "MAMA";
+
+            if (triggerSource === 'madre') copyData(madre, apo1);
+            else if (triggerSource === 'apo1') copyData(apo1, madre);
+            else smartCopy(apo1, madre);
+        }
+
+        // Apo 1 - Padre
+        if (checkPadreApo1 && checkPadreApo1.checked) {
+            if (checkMadreApo1) checkMadreApo1.checked = false;
+            if (checkPadreApo2) checkPadreApo2.checked = false;
+            if (apo1.parentesco) apo1.parentesco.value = "PAPA";
+
+            if (triggerSource === 'padre') copyData(padre, apo1);
+            else if (triggerSource === 'apo1') copyData(apo1, padre);
+            else smartCopy(apo1, padre);
+        }
+
+        // Apo 2 - Madre
+        if (checkMadreApo2 && checkMadreApo2.checked) {
+            if (checkPadreApo2) checkPadreApo2.checked = false;
+            if (checkMadreApo1) checkMadreApo1.checked = false;
+            if (apo2.parentesco) apo2.parentesco.value = "MAMA";
+
+            if (triggerSource === 'madre') copyData(madre, apo2);
+            else if (triggerSource === 'apo2') copyData(apo2, madre);
+            else smartCopy(apo2, madre);
+        }
+
+        // Apo 2 - Padre
+        if (checkPadreApo2 && checkPadreApo2.checked) {
+            if (checkMadreApo2) checkMadreApo2.checked = false;
+            if (checkPadreApo1) checkPadreApo1.checked = false;
+            if (apo2.parentesco) apo2.parentesco.value = "PAPA";
+
+            if (triggerSource === 'padre') copyData(padre, apo2);
+            else if (triggerSource === 'apo2') copyData(apo2, padre);
+            else smartCopy(apo2, padre);
+        }
+    }
+
+    // Escuchadores de cambio en Checkboxes
+    if (checkMadreApo1) checkMadreApo1.addEventListener('change', () => syncForm('check'));
+    if (checkPadreApo1) checkPadreApo1.addEventListener('change', () => syncForm('check'));
+    if (checkMadreApo2) checkMadreApo2.addEventListener('change', () => syncForm('check'));
+    if (checkPadreApo2) checkPadreApo2.addEventListener('change', () => syncForm('check'));
+
+    // Escuchadores de escritura en campos
+    Object.values(apo1).filter(Boolean).forEach(el => el.addEventListener('input', () => syncForm('apo1')));
+    Object.values(apo2).filter(Boolean).forEach(el => el.addEventListener('input', () => syncForm('apo2')));
+    Object.values(madre).filter(Boolean).forEach(el => el.addEventListener('input', () => syncForm('madre')));
+    Object.values(padre).filter(Boolean).forEach(el => el.addEventListener('input', () => syncForm('padre')));
+
+    // --- CONTROLES MÉDICOS ---
     if (esAlergica && detalleAlergias) {
         esAlergica.addEventListener('change', (e) => {
-            const esTrue = e.target.type === 'checkbox' ? e.target.checked : e.target.value === 'true';
+            const esTrue = e.target.value === 'true';
             detalleAlergias.disabled = !esTrue;
-            if (detalleAlergias.disabled) detalleAlergias.value = '';
+            if (!esTrue) detalleAlergias.value = '';
         });
     }
 
     if (tomaMedicamentos && detalleMedicamentos) {
         tomaMedicamentos.addEventListener('change', (e) => {
-            const esTrue = e.target.type === 'checkbox' ? e.target.checked : e.target.value === 'true';
+            const esTrue = e.target.value === 'true';
             detalleMedicamentos.disabled = !esTrue;
-            if (detalleMedicamentos.disabled) detalleMedicamentos.value = '';
+            if (!esTrue) detalleMedicamentos.value = '';
         });
     }
 
-    // 3. Sincronización de Checkboxes Madre/Padre -> Apoderados
-    function copiarValores(srcRut, srcNom, srcApe, srcTel, srcDir, srcCom, destRut, destNom, destApe, destTel, destDir, destCom) {
-        if (srcRut && destRut) destRut.value = srcRut.value || '';
-        if (srcNom && destNom) destNom.value = srcNom.value || '';
-        if (srcApe && destApe) destApe.value = srcApe.value || '';
-        if (srcTel && destTel) destTel.value = srcTel.value || '';
-        if (srcDir && destDir) destDir.value = srcDir.value || '';
-        if (srcCom && destCom) destCom.value = srcCom.value || '';
-    }
-
-    function sincronizarFormulario() {
-        if (checkMadreApo1 && checkMadreApo1.checked) {
-            if (checkPadreApo1) checkPadreApo1.checked = false;
-            if (apoParentesco) apoParentesco.value = "MAMA";
-            if (checkMadreApo2) checkMadreApo2.checked = false;
-            // CORREGIDO: Origen (Madre) -> Destino (Apoderado 1)
-            copiarValores(madreRut, madreNombres, madreApellidos, madreTelefono, madreDireccion, madreComuna, apoRut, apoNombres, apoApellidos, apoTelefono, apoDireccion, apoComuna);
-        }
-
-        if (checkPadreApo1 && checkPadreApo1.checked) {
-            if (checkMadreApo1) checkMadreApo1.checked = false;
-            if (apoParentesco) apoParentesco.value = "PAPA";
-            if (checkPadreApo2) checkPadreApo2.checked = false;
-            // CORREGIDO: Origen (Padre) -> Destino (Apoderado 1)
-            copiarValores(padreRut, padreNombres, padreApellidos, padreTelefono, padreDireccion, padreComuna, apoRut, apoNombres, apoApellidos, apoTelefono, apoDireccion, apoComuna);
-        }
-
-        if (checkMadreApo2 && checkMadreApo2.checked) {
-            if (checkPadreApo2) checkPadreApo2.checked = false;
-            if (apoParentesco2) apoParentesco2.value = "MAMA";
-            if (checkMadreApo1) checkMadreApo1.checked = false;
-            // CORREGIDO: Origen (Madre) -> Destino (Apoderado 2)
-            copiarValores(madreRut, madreNombres, madreApellidos, madreTelefono, madreDireccion, madreComuna, apoRut2, apoNombres2, apoApellidos2, apoTelefono2, apoDireccion2, apoComuna2);
-        }
-
-        if (checkPadreApo2 && checkPadreApo2.checked) {
-            if (checkMadreApo2) checkMadreApo2.checked = false;
-            if (apoParentesco2) apoParentesco2.value = "PAPA";
-            if (checkPadreApo1) checkPadreApo1.checked = false;
-            // CORREGIDO: Origen (Padre) -> Destino (Apoderado 2)
-            copiarValores(padreRut, padreNombres, padreApellidos, padreTelefono, padreDireccion, padreComuna, apoRut2, apoNombres2, apoApellidos2, apoTelefono2, apoDireccion2, apoComuna2);
-        }
-    }
-
-    // Escuchar cambios en las casillas de selección
-    [checkMadreApo1, checkPadreApo1, checkMadreApo2, checkPadreApo2].filter(Boolean).forEach(chk => {
-        chk.addEventListener('change', sincronizarFormulario);
-    });
-
-    // Escuchar tipeo en tiempo real sobre los campos de Madre y Padre para actualizar al Apoderado
-    [madreRut, madreNombres, madreApellidos, madreTelefono, madreDireccion, madreComuna,
-        padreRut, padreNombres, padreApellidos, padreTelefono, padreDireccion, padreComuna].filter(Boolean).forEach(inp => {
-            inp.addEventListener('input', sincronizarFormulario);
-        });
-
-    // Formato y Validación de RUT
+    // --- FORMATO Y VALIDACIÓN DE RUT ---
     function formatearRut(rut) {
         if (!rut) return '';
         rut = rut.toString().trim().toUpperCase().replace(/\./g, '').replace(/-/g, '').replace(/[^0-9K]/g, '');
@@ -193,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Envío del Formulario (Petición POST)
+    // --- ENVÍO DEL FORMULARIO ---
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -202,9 +213,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const fechaStr = new Date().toISOString();
+
         const payload = {
             cursoActual: getVal('cursoActual'),
-            correoComprobante: getVal('apo1Correo', 'apoCorreo'),
+            correoComprobante: getVal('apoCorreo'),
             fechaHoraRegistro: fechaStr,
             alumna: {
                 rut: getVal('alumnaRut'),
@@ -217,15 +230,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 comuna: getVal('alumnaComuna'),
                 viveCon: getVal('alumnaViveCon')
             },
-
             fichaMedica: {
-                esAlergica: esAlergica ? (esAlergica.type === 'checkbox' ? esAlergica.checked : esAlergica.value === 'true') : false,
-                detalleAlergias: getVal('detalleAlergias', 'medAlergiasDetalle') || null,
-                tomaMedicamentos: tomaMedicamentos ? (tomaMedicamentos.type === 'checkbox' ? tomaMedicamentos.checked : tomaMedicamentos.value === 'true') : false,
-                detalleMedicamentos: getVal('detalleMedicamentos', 'medMedicamentosDetalle') || null,
-                condicionMedicaAdicional: getVal('condicionMedicaAdicional', 'medCondicion') || null
+                esAlergica: getVal('esAlergica') === 'true',
+                detalleAlergias: getVal('detalleAlergias') || null,
+                tomaMedicamentos: getVal('tomaMedicamentos') === 'true',
+                detalleMedicamentos: getVal('detalleMedicamentos') || null,
+                condicionMedicaAdicional: getVal('condicionMedicaAdicional') || null
             },
-
             apoderadoTitular: {
                 rut: getVal('apoRut'),
                 nombres: getVal('apoNombres'),
@@ -234,10 +245,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 telefono: getVal('apoTelefono'),
                 correo: getVal('apoCorreo'),
                 direccion: getVal('apoDireccion'),
-                comuna: getVal('apo1Comuna', 'apoComuna'),
-                esMismoQueApoderado: getVal('checkMadreEsApoderado') === 'on' || getVal('checkPadreEsApoderado') === 'on'
+                comuna: getVal('apoComuna'),
+                esMismoQueApoderado: (checkMadreApo1 && checkMadreApo1.checked) || (checkPadreApo1 && checkPadreApo1.checked)
             },
-
             apoderadoSuplente: {
                 rut: getVal('apoRut2'),
                 nombres: getVal('apoNombres2'),
@@ -247,9 +257,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 correo: getVal('apoCorreo2'),
                 direccion: getVal('apoDireccion2'),
                 comuna: getVal('apoComuna2'),
-                esMismoQueApoderado: getVal('checkMadreEsApoderado2') === 'on' || getVal('checkPadreEsApoderado2') === 'on'
+                esMismoQueApoderado: (checkMadreApo2 && checkMadreApo2.checked) || (checkPadreApo2 && checkPadreApo2.checked)
             },
-
             madre: getVal('madreRut') ? {
                 rut: getVal('madreRut'),
                 nombres: getVal('madreNombres'),
@@ -259,7 +268,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 direccion: getVal('madreDireccion'),
                 comuna: getVal('madreComuna')
             } : null,
-
             padre: getVal('padreRut') ? {
                 rut: getVal('padreRut'),
                 nombres: getVal('padreNombres'),
@@ -269,7 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 direccion: getVal('padreDireccion'),
                 comuna: getVal('padreComuna')
             } : null,
-
             autorizadoRetiro: {
                 rut: getVal('retiraRut'),
                 nombreCompleto: getVal('retiraNombreCompleto'),
@@ -297,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.numeroMatricula) sessionStorage.setItem('numeroMatricula', data.numeroMatricula);
                 if (data.fechaRegistro) sessionStorage.setItem('fechaRegistro', data.fechaRegistro);
 
-                const correoDestino = data.correoComprobante || payload.correoComprobante || payload.apoderadoTitular.correoElectronico;
+                const correoDestino = data.correoComprobante || payload.correoComprobante || payload.apoderadoTitular.correo;
                 sessionStorage.setItem('correoComprobante', correoDestino);
 
                 alert('¡Pre-Matrícula enviada exitosamente!');
