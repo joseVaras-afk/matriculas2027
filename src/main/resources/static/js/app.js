@@ -178,8 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function procesarCampoRut(input) {
-        if (input.value.trim() === '') {
-            input.classList.remove('is-invalid');
+        if (!input || input.value.trim() === '') {
+            if (input) input.classList.remove('is-invalid');
             return true;
         }
         input.value = formatearRut(input.value);
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Validar todos los campos de RUT antes de enviar
+        // Validar únicamente campos con valor ingresado
         let hayRutInvalido = false;
         document.querySelectorAll('.rut-input').forEach(input => {
             if (input.value.trim() !== '') {
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (hayRutInvalido || document.querySelectorAll('.is-invalid').length > 0) {
-            alert("Atención: Hay uno o más RUTs con formato/dígito verificador incorrecto. Por favor corríjalos (marcados en rojo).");
+            alert("Atención: Hay uno o más RUTs con dígito verificador o formato incorrecto (marcados en rojo).");
             return;
         }
 
@@ -293,11 +293,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const respuesta = await fetch('/api/matriculas', {
+            // Intento 1: /api/matriculas
+            let respuesta = await fetch('/api/matriculas', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
+
+            // Reintento en singular si devuelve 404 Not Found
+            if (respuesta.status === 404) {
+                respuesta = await fetch('/api/matricula', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            }
 
             if (respuesta.ok) {
                 const data = await respuesta.json();
