@@ -1,6 +1,7 @@
 :root {
     --azul-marino: #1A365D;
-    --rosado-institucional: #D81B60; /* Un rosado elegante y moderno */
+    --rosado-institucional: #D81B60;
+    /* Un rosado elegante y moderno */
     --fondo-claro: #f7d2f4;
 }
 
@@ -58,7 +59,8 @@ body {
 }
 
 /* Inputs enfocados */
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
     border-color: var(--rosado-institucional);
     box-shadow: 0 0 0 0.25rem rgba(216, 27, 96, 0.25);
 }

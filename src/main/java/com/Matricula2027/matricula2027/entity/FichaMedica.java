@@ -1,32 +1,31 @@
 package com.Matricula2027.matricula2027.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "fichas_medicas")
+@Table(name = "ficha_medica")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class FichaMedica {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "es_alergica", nullable = false)
     private Boolean esAlergica;
-
-    @Column(name = "detalle_alergias", columnDefinition = "TEXT")
     private String detalleAlergias;
-
-    @Column(name = "toma_medicamentos", nullable = false)
     private Boolean tomaMedicamentos;
-
-    @Column(name = "detalle_medicamentos", columnDefinition = "TEXT")
     private String detalleMedicamentos;
-
-    @Column(name = "condicion_medica_adicional", columnDefinition = "TEXT")
     private String condicionMedicaAdicional;
+    private String enfermedad;
+    private String enfermedadCual;
+    private String tratamiento;
+    private String contramedicacion;
+    private String prevsion;
+    private String cesfam;
+    private String personaEmergencia;
+    private String telEmergencia;
+    private String parentescoEmergencia;
 }
