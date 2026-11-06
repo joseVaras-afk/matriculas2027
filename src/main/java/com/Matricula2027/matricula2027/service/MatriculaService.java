@@ -42,8 +42,6 @@ public class MatriculaService {
 
         Familiar apoderado = obtenerOCrearFamiliar(dto.getApoderadoTitular());
         Familiar apoderadoSuplente = obtenerOCrearFamiliar(dto.getApoderadoSuplente());
-        Familiar madre = obtenerOCrearFamiliar(dto.getMadre());
-        Familiar padre = obtenerOCrearFamiliar(dto.getPadre());
 
         Alumna alumna = new Alumna();
         alumna.setRut(dto.getAlumna().getRut());
@@ -66,8 +64,6 @@ public class MatriculaService {
         matricula.setCursoActual(dto.getCursoActual());
         matricula.setApoderadoTitular(apoderado);
         matricula.setApoderadoSuplente(apoderadoSuplente);
-        matricula.setMadre(madre);
-        matricula.setPadre(padre);
         matricula.setFechaHoraRegistro(LocalDateTime.now());
         matricula.setNumeroMatricula(generarNumeroMatricula());
         matricula.setEstadoFicha("PENDIENTE");

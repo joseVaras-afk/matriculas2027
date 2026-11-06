@@ -202,6 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cursoActual: getVal('cursoActual'),
             correoComprobante: getVal('apoCorreo'),
             fechaHoraRegistro: fechaStr,
+            numeroMatricula: getVal('numeroMatricula'),
 
             alumna: {
                 rut: getVal('alumnaRut'),
@@ -262,28 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 telLabApo: getVal('telLabApo2'),
                 direcLabApo: getVal('direcLabApo2'),
                 esMismoQueApoderado: checkMadreApo2 ? checkMadreApo2.checked : false
-            } : null,
-
-            madre: getVal('madreRut') ? {
-                rut: getVal('madreRut'),
-                nombres: getVal('madreNombres'),
-                apellidos: getVal('madreApellidos'),
-                parentesco: "MADRE",
-                telefono: getVal('madreTelefono'),
-                correo: getVal('madreCorreo'),
-                direccion: getVal('madreDireccion'),
-                comuna: getVal('madreComuna')
-            } : null,
-
-            padre: getVal('padreRut') ? {
-                rut: getVal('padreRut'),
-                nombres: getVal('padreNombres'),
-                apellidos: getVal('padreApellidos'),
-                parentesco: "PADRE",
-                telefono: getVal('padreTelefono'),
-                correo: getVal('padreCorreo'),
-                direccion: getVal('padreDireccion'),
-                comuna: getVal('padreComuna')
             } : null,
 
             datosFamiliares: {
