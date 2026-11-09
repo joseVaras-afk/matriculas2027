@@ -18,7 +18,7 @@
         <!-- ENCABEZADO CON LOGO DE LA ESCUELA -->
         <div class="text-center mb-4">
             <img src="assets/logo.png" alt="Logo Escuela" class="logo-escuela" onerror="this.style.display='none'">
-            <h2 class="fw-bold" style="color: var(--azul-marino);">FICHA DE PRE-MATRÍCULA Y SALUD 2027</h2>
+            <h2 class="fw-bold" style="color: var(--azul-marino);">FICHA DE PRE-MATRÍCULA 2027</h2>
             <p class="text-muted mb-0">Complete todos los campos requeridos para registrar la postulación</p>
         </div>
 
@@ -249,9 +249,30 @@
                             <label class="form-label" for="apoVilla">Villa / Población</label>
                             <input type="text" class="form-control text-uppercase" id="apoVilla">
                         </div>
-                        <div class="col-md-4">
-                            <label class="form-label" for="apoComuna">Comuna</label>
-                            <input type="text" class="form-control text-uppercase" id="apoComuna">
+                        <div class="col-md-3">
+                            <label class="form-label" for="apoComuna">Comuna *</label>
+                            <select class="form-select" id="apoComuna" required>
+                                <option value="">Seleccione Comuna...</option>
+                                <option value="PUDAHUEL">PUDAHUEL</option>
+                                <option value="CERRO NAVIA">CERRO NAVIA</option>
+                                <option value="ESTACION CENTRAL">ESTACIÓN CENTRAL</option>
+                                <option value="LA FLORIDA">LA FLORIDA</option>
+                                <option value="LO PRADO">LO PRADO</option>
+                                <option value="MAIPU">MAIPÚ</option>
+                                <option value="PADRE HURTADO">PADRE HURTADO</option>
+                                <option value="PEDRO AGUIRRE CERDA">PEDRO AGUIRRE CERDA</option>
+                                <option value="PEÑAFLOR">PEÑAFLOR</option>
+                                <option value="PUENTE ALTO">PUENTE ALTO</option>
+                                <option value="QUILICURA">QUILICURA</option>
+                                <option value="QUINTA NORMAL">QUINTA NORMAL</option>
+                                <option value="RECOLETA">RECOLETA</option>
+                                <option value="RENCA">RENCA</option>
+                                <option value="SAN BERNARDO">SAN BERNARDO</option>
+                                <option value="SANTIAGO">SANTIAGO CENTRO</option>
+                                <option value="TALAGANTE">TALAGANTE</option>
+                                <option value="OTRA COMUNA">OTRA COMUNA</option>
+                            </select>
+                            <div class="invalid-feedback">Seleccione la comuna.</div>
                         </div>
                         <div class="col-md-3">
                             <label class="form-label" for="ocupacionApo">Ocupación / Oficio</label>
@@ -342,9 +363,30 @@
                             <label class="form-label" for="apoVilla2">Villa / Población</label>
                             <input type="text" class="form-control text-uppercase" id="apoVilla2">
                         </div>
-                        <div class="col-md-4">
-                            <label class="form-label" for="apoComuna2">Comuna</label>
-                            <input type="text" class="form-control text-uppercase" id="apoComuna2">
+                        <div class="col-md-3">
+                            <label class="form-label" for="apoComuna2">Comuna *</label>
+                            <select class="form-select" id="apoComuna2" required>
+                                <option value="">Seleccione Comuna...</option>
+                                <option value="PUDAHUEL">PUDAHUEL</option>
+                                <option value="CERRO NAVIA">CERRO NAVIA</option>
+                                <option value="ESTACION CENTRAL">ESTACIÓN CENTRAL</option>
+                                <option value="LA FLORIDA">LA FLORIDA</option>
+                                <option value="LO PRADO">LO PRADO</option>
+                                <option value="MAIPU">MAIPÚ</option>
+                                <option value="PADRE HURTADO">PADRE HURTADO</option>
+                                <option value="PEDRO AGUIRRE CERDA">PEDRO AGUIRRE CERDA</option>
+                                <option value="PEÑAFLOR">PEÑAFLOR</option>
+                                <option value="PUENTE ALTO">PUENTE ALTO</option>
+                                <option value="QUILICURA">QUILICURA</option>
+                                <option value="QUINTA NORMAL">QUINTA NORMAL</option>
+                                <option value="RECOLETA">RECOLETA</option>
+                                <option value="RENCA">RENCA</option>
+                                <option value="SAN BERNARDO">SAN BERNARDO</option>
+                                <option value="SANTIAGO">SANTIAGO CENTRO</option>
+                                <option value="TALAGANTE">TALAGANTE</option>
+                                <option value="OTRA COMUNA">OTRA COMUNA</option>
+                            </select>
+                            <div class="invalid-feedback">Seleccione la comuna.</div>
                         </div>
                         <div class="col-md-3">
                             <label class="form-label" for="ocupacionApo2">Ocupación / Oficio</label>
