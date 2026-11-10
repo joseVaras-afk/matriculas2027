@@ -59,6 +59,7 @@ public class MatriculaService {
         alumna.setEtnia(dto.getAlumna().getEtnia());
         alumna.setProcedencia(dto.getAlumna().getProcedencia());
         alumna.setNivelesRepetidos(dto.getAlumna().getNivelesRepetidos());
+        alumna.setNecesidadesEspeciales(dto.getAlumna().getNecesidadesEspeciales());
 
         Matricula matricula = new Matricula();
         matricula.setCursoActual(dto.getCursoActual());
@@ -275,6 +276,7 @@ public class MatriculaService {
             ctx.put("etnia", dto.getEtnia());
             ctx.put("procedencia", dto.getProcedencia());
             ctx.put("nivelesRepetidos", dto.getNivelesRepetidos());
+            ctx.put("necesidadesEspeciales", dto.getNecesidadesEspeciales());
 
             // 3. Apoderado Titular
             ctx.put("apoNombre", dto.getApoNombre());
@@ -407,6 +409,7 @@ public class MatriculaService {
             dto.setEtniaSiNo(defaultString(alu.getEtniaSiNo()));
             dto.setProcedencia(defaultString(alu.getProcedencia()));
             dto.setNivelesRepetidos(defaultString(alu.getNivelesRepetidos()));
+            dto.setNecesidadesEspeciales(defaultString(alu.getNecesidadesEspeciales()));
 
             String aluNomCom = String.format("%s %s %s",
                     defaultString(alu.getNombres()),
@@ -617,6 +620,7 @@ public class MatriculaService {
             a.setEtnia(aDto.getEtnia());
             a.setProcedencia(aDto.getProcedencia());
             a.setNivelesRepetidos(aDto.getNivelesRepetidos());
+            a.setNecesidadesEspeciales(aDto.getNecesidadesEspeciales());
         }
 
         if (dto.getApoderadoTitular() != null) {

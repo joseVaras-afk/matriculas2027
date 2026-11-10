@@ -218,7 +218,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 etniaSiNo: getVal('etniaSiNo') === 'true',
                 etnia: getVal('etnia'),
                 procedencia: getVal('procedencia'),
-                nivelesRepetidos: getVal('nivelesRepetidos')
+                nivelesRepetidos: getVal('nivelesRepetidos'),
+                necesidadesEspeciales: getVal('necesidadesEspeciales')
             },
 
             apoderadoTitular: {

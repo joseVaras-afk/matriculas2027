@@ -32,4 +32,5 @@ public class Alumna {
     private String etnia;
     private String procedencia;
     private String nivelesRepetidos;
+    private String necesidadesEspeciales;
 }

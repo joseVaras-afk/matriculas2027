@@ -31,6 +31,7 @@ public class FichaDto {
     private String etnia;
     private String procedencia;
     private String nivelesRepetidos;
+    private String necesidadesEspeciales;
 
     // Apoderado Titular
     private String apoNombre;
