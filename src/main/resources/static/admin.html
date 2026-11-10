@@ -263,9 +263,7 @@
             window.location.href = `/api/matriculas/${id}/word`;
         }
 
-        async function cambiarEstado(id, nuevoEstado, btnElement) {
-            if (btnElement) btnElement.disabled = true;
-
+        async function cambiarEstado(id, nuevoEstado) {
             try {
                 const res = await fetch(`/api/matriculas/${id}/estado`, {
                     method: 'PATCH',
@@ -274,19 +272,12 @@
                 });
 
                 if (res.ok) {
-                    // Actualizar la celda en el DOM directamente
-                    const badge = document.getElementById(`estado-badge-${id}`);
-                    if (badge) {
-                        badge.innerText = nuevoEstado;
-                        badge.className = `badge ${nuevoEstado === 'MATRICULADA' ? 'bg-success' : 'bg-warning'}`;
-                    }
+                    cargarMatriculas();
                 } else {
                     alert('No se pudo actualizar el estado.');
                 }
             } catch (err) {
                 alert('Error de conexión al cambiar el estado.');
-            } finally {
-                if (btnElement) btnElement.disabled = false;
             }
         }
     </script>
