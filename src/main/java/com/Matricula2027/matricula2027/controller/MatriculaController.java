@@ -45,10 +45,9 @@ public class MatriculaController {
 
             try {
                 emailService.enviarComprobante(
-                    correoDestino, 
-                    matriculaGuardada.getNumeroMatricula(), 
-                    fechaFormateada
-                );
+                        correoDestino,
+                        matriculaGuardada.getNumeroMatricula(),
+                        fechaFormateada);
             } catch (Exception e) {
                 System.err.println("Error al enviar el correo automático: " + e.getMessage());
             }
@@ -99,15 +98,10 @@ public class MatriculaController {
     }
 
     @PatchMapping("/{id}/estado")
-    public ResponseEntity<?> cambiarEstado(@PathVariable Long id, @RequestBody Map<String, String> body) {
+    public ResponseEntity<Void> cambiarEstado(@PathVariable Long id, @RequestBody Map<String, String> body) {
         String nuevoEstado = body.get("estado");
-        try {
-            Matricula matriculaActualizada = matriculaService.actualizarEstado(id, nuevoEstado);
-            return ResponseEntity.ok(matriculaActualizada);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(Map.of("mensaje", "Error al actualizar el estado: " + e.getMessage()));
-        }
+        matriculaService.actualizarEstado(id, nuevoEstado);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}/word")
@@ -115,32 +109,35 @@ public class MatriculaController {
         try {
             Matricula m = matriculaService.obtenerPorId(id);
             byte[] docxBytes = matriculaService.generarFichaDocx(m);
-            String nomArchivo = m.getAlumna().getApellidoPaterno()+" "+ m.getAlumna().getApellidoMaterno()+" "+m.getAlumna().getNombres()+" "+m.getCursoPostulacion();
+            String nomArchivo = m.getAlumna().getApellidoPaterno() + " " + m.getAlumna().getApellidoMaterno() + " "
+                    + m.getAlumna().getNombres() + " " + m.getCursoPostulacion();
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"));
-            headers.setContentDispositionFormData("attachment", nomArchivo+ ".docx");
+            headers.setContentType(MediaType
+                    .parseMediaType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"));
+            headers.setContentDispositionFormData("attachment", nomArchivo + ".docx");
 
             return ResponseEntity.ok().headers(headers).body(docxBytes);
         } catch (Exception e) {
             System.err.println("Error al descargar documento Word para ID " + id + ": " + e.getMessage());
-            e.printStackTrace(); 
+            e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }
 
     @GetMapping("/{id}/pdf")
-public ResponseEntity<byte[]> obtenerFichaPdf(@PathVariable Long id) {
-    Matricula m = matriculaService.obtenerPorId(id);
-    byte[] pdfBytes = matriculaService.generarFichaPdf(m);
-    String nomArchivo = m.getAlumna().getApellidoPaterno()+" "+ m.getAlumna().getApellidoMaterno()+" "+m.getAlumna().getNombres()+" "+m.getCursoPostulacion();
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_PDF);
-    headers.setContentDisposition(ContentDisposition.inline()
-            .filename(nomArchivo+ ".pdf")
-            .build());
+    public ResponseEntity<byte[]> obtenerFichaPdf(@PathVariable Long id) {
+        Matricula m = matriculaService.obtenerPorId(id);
+        byte[] pdfBytes = matriculaService.generarFichaPdf(m);
+        String nomArchivo = m.getAlumna().getApellidoPaterno() + " " + m.getAlumna().getApellidoMaterno() + " "
+                + m.getAlumna().getNombres() + " " + m.getCursoPostulacion();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDisposition(ContentDisposition.inline()
+                .filename(nomArchivo + ".pdf")
+                .build());
 
-    return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
-}
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerPorId(@PathVariable Long id) {
@@ -156,11 +153,13 @@ public ResponseEntity<byte[]> obtenerFichaPdf(@PathVariable Long id) {
     public ResponseEntity<?> actualizarMatricula(@PathVariable Long id, @RequestBody MatriculaRequestDTO dto) {
         try {
             Matricula matriculaActualizada = matriculaService.actualizarMatricula(id, dto);
-            return ResponseEntity.ok(Map.of("mensaje", "Ficha actualizada correctamente", "id", matriculaActualizada.getId()));
+            return ResponseEntity
+                    .ok(Map.of("mensaje", "Ficha actualizada correctamente", "id", matriculaActualizada.getId()));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("mensaje", e.getMessage()));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("mensaje", "Error al actualizar la ficha: " + e.getMessage()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("mensaje", "Error al actualizar la ficha: " + e.getMessage()));
         }
     }
 }

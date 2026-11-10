@@ -236,10 +236,8 @@ public class MatriculaService {
     }
 
     @Transactional
-    public Matricula actualizarEstado(Long id, String nuevoEstado) {
-        Matricula matricula = obtenerPorId(id);
-        matricula.setEstadoFicha(nuevoEstado);
-        return matriculaRepository.save(matricula);
+    public void actualizarEstado(Long id, String nuevoEstado) {
+        matriculaRepository.actualizarEstadoDirecto(id, nuevoEstado);
     }
 
     @Transactional(readOnly = true)
