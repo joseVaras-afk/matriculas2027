@@ -221,7 +221,7 @@ public class MatriculaService {
 
     @Transactional(readOnly = true)
     public List<Matricula> obtenerTodas() {
-        return matriculaRepository.findAll();
+        return matriculaRepository.findAllConRelaciones();
     }
 
     @Transactional(readOnly = true)

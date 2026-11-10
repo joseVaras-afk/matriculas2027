@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,22 +13,27 @@
         body {
             background-color: #f8f9fa;
         }
+
         .header-admin {
             background-color: #002060;
             color: white;
         }
+
         .table-hover tbody tr:hover {
             background-color: #f1f4f9;
         }
+
         .badge-matriculada {
             background-color: #198754;
         }
+
         .badge-pendiente {
             background-color: #ffc107;
             color: #000;
         }
     </style>
 </head>
+
 <body>
 
     <!-- CABECERA PRINCIPAL -->
@@ -61,7 +67,8 @@
                         <label class="form-label fw-bold small text-muted mb-1">Buscar por Alumna o Folio</label>
                         <div class="input-group">
                             <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
-                            <input type="text" id="inputBuscar" class="form-control" placeholder="Nombre, RUT o Folio..." onkeyup="filtrarTabla()">
+                            <input type="text" id="inputBuscar" class="form-control"
+                                placeholder="Nombre, RUT o Folio..." onkeyup="filtrarTabla()">
                         </div>
                     </div>
 
@@ -256,7 +263,9 @@
             window.location.href = `/api/matriculas/${id}/word`;
         }
 
-        async function cambiarEstado(id, nuevoEstado) {
+        async function cambiarEstado(id, nuevoEstado, btnElement) {
+            if (btnElement) btnElement.disabled = true;
+
             try {
                 const res = await fetch(`/api/matriculas/${id}/estado`, {
                     method: 'PATCH',
@@ -265,14 +274,22 @@
                 });
 
                 if (res.ok) {
-                    cargarMatriculas();
+                    // Actualizar la celda en el DOM directamente
+                    const badge = document.getElementById(`estado-badge-${id}`);
+                    if (badge) {
+                        badge.innerText = nuevoEstado;
+                        badge.className = `badge ${nuevoEstado === 'MATRICULADA' ? 'bg-success' : 'bg-warning'}`;
+                    }
                 } else {
                     alert('No se pudo actualizar el estado.');
                 }
             } catch (err) {
                 alert('Error de conexión al cambiar el estado.');
+            } finally {
+                if (btnElement) btnElement.disabled = false;
             }
         }
     </script>
 </body>
+
 </html>

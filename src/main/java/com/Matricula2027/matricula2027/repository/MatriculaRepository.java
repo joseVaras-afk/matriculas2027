@@ -22,7 +22,13 @@ public interface MatriculaRepository extends JpaRepository<Matricula, Long> {
     List<Matricula> findByCursoActual(String cursoActual);
 
     @Transactional
-    @Modifying
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Query("UPDATE Matricula m SET m.estadoFicha = :nuevoEstado WHERE m.id = :id")
     int actualizarEstadoDirecto(@Param("id") Long id, @Param("nuevoEstado") String nuevoEstado);
+
+    @Query("SELECT DISTINCT m FROM Matricula m " +
+            "LEFT JOIN FETCH m.alumna " +
+            "LEFT JOIN FETCH m.apoderadoTitular " +
+            "LEFT JOIN FETCH m.apoderadoSuplente")
+    List<Matricula> findAllConRelaciones();
 }
