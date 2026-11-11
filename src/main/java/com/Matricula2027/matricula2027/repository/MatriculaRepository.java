@@ -1,5 +1,6 @@
 package com.Matricula2027.matricula2027.repository;
 
+import com.Matricula2027.matricula2027.dto.MatriculaListadoDTO;
 import com.Matricula2027.matricula2027.entity.Matricula;
 
 import jakarta.transaction.Transactional;
@@ -31,4 +32,16 @@ public interface MatriculaRepository extends JpaRepository<Matricula, Long> {
             "LEFT JOIN FETCH m.apoderadoTitular " +
             "LEFT JOIN FETCH m.apoderadoSuplente")
     List<Matricula> findAllConRelaciones();
+
+    @Query("SELECT new com.Matricula2027.matricula2027.dto.MatriculaListadoDTO(" +
+            "m.id, " +
+            "m.numeroMatricula, " +
+            "CONCAT(COALESCE(a.nombres, ''), ' ', COALESCE(a.apellidoPaterno, ''), ' ', COALESCE(a.apellidoMaterno, '')), "
+            +
+            "m.cursoPostulacion, " +
+            "m.estadoFicha) " +
+            "FROM Matricula m " +
+            "LEFT JOIN m.alumna a " +
+            "ORDER BY m.id DESC")
+    List<MatriculaListadoDTO> obtenerListadoResumen();
 }

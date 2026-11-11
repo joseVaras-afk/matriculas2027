@@ -1,5 +1,6 @@
 package com.Matricula2027.matricula2027.controller;
 
+import com.Matricula2027.matricula2027.dto.MatriculaListadoDTO;
 import com.Matricula2027.matricula2027.dto.MatriculaRequestDTO;
 import com.Matricula2027.matricula2027.entity.Matricula;
 import com.Matricula2027.matricula2027.service.EmailService;
@@ -90,11 +91,9 @@ public class MatriculaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Matricula>> listarMatriculas(@RequestParam(required = false) String curso) {
-        if (curso != null && !curso.isEmpty()) {
-            return ResponseEntity.ok(matriculaService.obtenerPorCurso(curso));
-        }
-        return ResponseEntity.ok(matriculaService.obtenerTodas());
+    public ResponseEntity<List<MatriculaListadoDTO>> listarMatriculas() {
+        List<MatriculaListadoDTO> lista = matriculaService.listarMatriculasResumen();
+        return ResponseEntity.ok(lista);
     }
 
     @PatchMapping("/{id}/estado")

@@ -1,6 +1,7 @@
 package com.Matricula2027.matricula2027.service;
 
 import com.Matricula2027.matricula2027.dto.FichaDto;
+import com.Matricula2027.matricula2027.dto.MatriculaListadoDTO;
 import com.Matricula2027.matricula2027.dto.MatriculaRequestDTO;
 import com.Matricula2027.matricula2027.dto.MatriculaRequestDTO.FamiliarDTO;
 import com.Matricula2027.matricula2027.entity.*;
@@ -222,6 +223,11 @@ public class MatriculaService {
     @Transactional(readOnly = true)
     public List<Matricula> obtenerTodas() {
         return matriculaRepository.findAllConRelaciones();
+    }
+
+    @Transactional(readOnly = true)
+    public List<MatriculaListadoDTO> listarMatriculasResumen() {
+        return matriculaRepository.obtenerListadoResumen();
     }
 
     @Transactional(readOnly = true)

@@ -185,13 +185,10 @@
 
             lista.forEach(m => {
                 if (!m) return;
-
-                const alu = m.alumna || {};
-                const nomAlumna = [val(alu?.nombres), val(alu?.apellidoPaterno), val(alu?.apellidoMaterno)]
-                    .filter(Boolean).join(' ') || 'Sin Nombre Registrado';
-                const rutAlumna = val(alu?.rut) || '---';
-
-                const estadoActual = m.estadoFicha || m.estado;
+                const folio = m.numeroMatricula;
+                const nomAlumna = m.nombreCompletoAlumna;
+                const curso = m.cursoPostulacion;
+                const estadoActual = m.estadoFicha;
                 const esMatriculada = estadoActual === 'MATRICULADA';
                 const badgeEstado = esMatriculada
                     ? '<span class="badge badge-matriculada">MATRICULADA</span>'
@@ -199,12 +196,11 @@
 
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td class="ps-3 fw-bold text-primary">${val(m.numeroMatricula) || '---'}</td>
+                    <td class="ps-3 fw-bold text-primary">${val(folio) || '---'}</td>
                     <td>
                         <div class="fw-bold">${nomAlumna}</div>
-                        <small class="text-muted">RUT: ${rutAlumna}</small>
                     </td>
-                    <td><span class="badge bg-light text-dark border px-3 py-2 fs-6">${val(m.cursoActual) || '---'}</span></td>
+                    <td><span class="badge bg-light text-dark border px-3 py-2 fs-6">${val(curso) || '---'}</span></td>
                     <td class="text-center">${badgeEstado}</td>
                     <td class="text-center pe-3">
                         <div class="btn-group" role="group">
