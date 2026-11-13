@@ -36,7 +36,7 @@ public class MatriculaService {
 
     @Transactional
     public Matricula registrarMatricula(MatriculaRequestDTO dto) {
-        String rutAlumna = dto.getAlumna().getRut();
+        String rutAlumna = dto.getAlumna().getRut().trim().toUpperCase();
         if (alumnaRepository.existsByRut(rutAlumna)) {
             throw new IllegalArgumentException("Ya existe una alumna registrada con el RUT: " + rutAlumna);
         }
@@ -45,7 +45,7 @@ public class MatriculaService {
         Familiar apoderadoSuplente = obtenerOCrearFamiliar(dto.getApoderadoSuplente());
 
         Alumna alumna = new Alumna();
-        alumna.setRut(dto.getAlumna().getRut());
+        alumna.setRut(rutAlumna);
         alumna.setNombres(dto.getAlumna().getNombres());
         alumna.setApellidoPaterno(dto.getAlumna().getApellidoPaterno());
         alumna.setApellidoMaterno(dto.getAlumna().getApellidoMaterno());
@@ -67,7 +67,13 @@ public class MatriculaService {
         matricula.setApoderadoTitular(apoderado);
         matricula.setApoderadoSuplente(apoderadoSuplente);
         matricula.setFechaHoraRegistro(LocalDateTime.now());
-        matricula.setNumeroMatricula(generarNumeroMatricula());
+
+        // 1. Folio temporal único (máx. 17 caracteres) para evitar colisiones de índice
+        // UNIQUE en TiDB
+        String folioTemporal = "T-" + Long.toString(System.nanoTime(), 36) + "-"
+                + java.util.concurrent.ThreadLocalRandom.current().nextInt(100, 999);
+        matricula.setNumeroMatricula(folioTemporal);
+
         matricula.setEstadoFicha("PENDIENTE");
         matricula.setCorreoComprobante(
                 dto.getApoderadoTitular() != null && dto.getApoderadoTitular().getCorreo() != null
@@ -145,7 +151,15 @@ public class MatriculaService {
             matricula.setFichaMedica(fichaMedica);
         }
 
-        return matriculaRepository.saveAndFlush(matricula);
+        // 2. Insertar para obtener el ID autoincremental garantizado por TiDB
+        Matricula matriculaGuardada = matriculaRepository.saveAndFlush(matricula);
+
+        // 3. Asignar el número de matrícula correlativo definitivo basado en su ID
+        // único
+        String numeroDefinitivo = String.format("2027-MAT-%04d", matriculaGuardada.getId());
+        matriculaGuardada.setNumeroMatricula(numeroDefinitivo);
+
+        return matriculaRepository.saveAndFlush(matriculaGuardada);
     }
 
     private Familiar obtenerOCrearFamiliar(FamiliarDTO dto) {

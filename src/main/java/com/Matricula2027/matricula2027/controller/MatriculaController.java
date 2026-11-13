@@ -65,9 +65,22 @@ public class MatriculaController {
                     .body(Map.of("mensaje", e.getMessage()));
 
         } catch (DataIntegrityViolationException e) {
+            String causaReal = (e.getMostSpecificCause() != null)
+                    ? e.getMostSpecificCause().getMessage()
+                    : e.getMessage();
             String rut = (dto.getAlumna() != null) ? dto.getAlumna().getRut() : "";
+
+            System.err.println("Error de integridad en BD: " + causaReal);
+
+            // Solo mostrar el mensaje de alumna duplicada si el error menciona su RUT o la
+            // tabla alumna
+            if (causaReal != null && (causaReal.contains(rut) || causaReal.toLowerCase().contains("alumna"))) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(Map.of("mensaje", "La alumna con el RUT " + rut + " ya se encuentra matriculada."));
+            }
+
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(Map.of("mensaje", "La alumna con el RUT " + rut + " ya se encuentra matriculada."));
+                    .body(Map.of("mensaje", "Conflicto de datos en el registro: " + causaReal));
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
