@@ -33,33 +33,32 @@
                             <label class="form-label fw-bold" for="cursoActual">Curso Actual al que Asiste *</label>
                             <select class="form-select" id="cursoActual" required>
                                 <option value="">Seleccione curso...</option>
-                                <option value="Pre-Kínder">Pre-Kínder A</option>
-                                <option value="Pre-Kínder">Pre-Kínder B</option>
-                                <option value="Pre-Kínder">Pre-Kínder C</option>
-                                <option value="Kínder">Kínder A</option>
-                                <option value="Kínder">Kínder B</option>
-                                <option value="Kínder">Kínder C</option>
-                                <option value="1° Básico">1° Básico A</option>
-                                <option value="1° Básico">1° Básico B</option>
-                                <option value="1° Básico">1° Básico C</option>
-                                <option value="2° Básico">2° Básico A</option>
-                                <option value="2° Básico">2° Básico B</option>
-                                <option value="2° Básico">2° Básico C</option>
-                                <option value="3° Básico">3° Básico A</option>
-                                <option value="3° Básico">3° Básico B</option>
-                                <option value="3° Básico">3° Básico C</option>
-                                <option value="4° Básico">4° Básico A</option>
-                                <option value="4° Básico">4° Básico B</option>
-                                <option value="4° Básico">4° Básico C</option>
-                                <option value="5° Básico">5° Básico A</option>
-                                <option value="5° Básico">5° Básico B</option>
-                                <option value="5° Básico">5° Básico C</option>
-                                <option value="6° Básico">6° Básico A</option>
-                                <option value="6° Básico">6° Básico B</option>
-                                <option value="6° Básico">6° Básico C</option>
-                                <option value="7° Básico">7° Básico A</option>
-                                <option value="7° Básico">7° Básico B</option>
-                                <option value="7° Básico">7° Básico C</option>
+                                <option value="Pre-Kínder A">Pre-Kínder A</option>
+                                <option value="Pre-Kínder B">Pre-Kínder B</option>
+                                <option value="Pre-Kínder C">Pre-Kínder C</option>
+                                <option value="Kínder A">Kínder A</option>
+                                <option value="Kínder B">Kínder B</option>
+                                <option value="Kínder C">Kínder C</option>
+                                <option value="1° Básico A">1° Básico A</option>
+                                <option value="1° Básico B">1° Básico B</option>
+                                <option value="1° Básico C">1° Básico C</option>
+                                <option value="2° Básico A">2° Básico A</option>
+                                <option value="2° Básico B">2° Básico B</option>
+                                <option value="2° Básico C">2° Básico C</option>
+                                <option value="3° Básico A">3° Básico A</option>
+                                <option value="3° Básico B">3° Básico B</option>
+                                <option value="3° Básico C">3° Básico C</option>
+                                <option value="4° Básico A">4° Básico A</option>
+                                <option value="4° Básico B">4° Básico B</option>
+                                <option value="4° Básico C">4° Básico C</option>
+                                <option value="5° Básico A">5° Básico A</option>
+                                <option value="5° Básico B">5° Básico B</option>
+                                <option value="5° Básico C">5° Básico C</option>
+                                <option value="6° Básico A">6° Básico A</option>
+                                <option value="6° Básico B">6° Básico B</option>
+                                <option value="6° Básico C">6° Básico C</option>
+                                <option value="7° Básico">7° Básico</option>
+                                <option value="8° Básico">8° Básico</option>
                             </select>
                             <div class="invalid-feedback">Seleccione el curso actual.</div>
                         </div>
@@ -304,7 +303,13 @@
                         </div>
                         <div class="col-md-3">
                             <label class="form-label" for="jornadaApo">Jornada Laboral</label>
-                            <input type="text" class="form-control text-uppercase" id="jornadaApo">
+                            <input type="text" class="form-control text-uppercase" id="">
+                            <select class="form-select" id="jornadaApo">
+                                <option value="">Seleccione...</option>
+                                <option value="COMPLETA">COMPLETA</option>
+                                <option value="PART-TIME">PART-TIME</option>
+                                <option value="EXCEPCIONAL">EXCEPCIONAL</option>
+                            </select>
                         </div>
                         <div class="col-md-3">
                             <label class="form-label" for="telLabApo">Teléfono Trabajo</label>
@@ -615,6 +620,7 @@
                                     <option value="TIO">TÍA/O</option>
                                     <option value="HERMANO">HERMANA/O</option>
                                     <option value="FURGON ESCOLAR">FURGÓN ESCOLAR</option>
+                                    <option VALUE="SE RETIRA SOLA">SE RETIRA SOLA</option>
                                     <option value="OTRO">OTRO</option>
                                 </select>
                             </div>
