@@ -303,7 +303,6 @@
                         </div>
                         <div class="col-md-3">
                             <label class="form-label" for="jornadaApo">Jornada Laboral</label>
-                            <input type="text" class="form-control text-uppercase" id="">
                             <select class="form-select" id="jornadaApo">
                                 <option value="">Seleccione...</option>
                                 <option value="COMPLETA">COMPLETA</option>
@@ -413,6 +412,8 @@
                                 <option value="SAN BERNARDO">SAN BERNARDO</option>
                                 <option value="SANTIAGO">SANTIAGO CENTRO</option>
                                 <option value="TALAGANTE">TALAGANTE</option>
+                                <option value="CERRILLOS">CERRILLOS</option>
+                                <option value="LO PRADO">LO PRADO</option>
                                 <option value="OTRA COMUNA">OTRA COMUNA</option>
                             </select>
                             <div class="invalid-feedback">Seleccione la comuna.</div>
@@ -423,7 +424,12 @@
                         </div>
                         <div class="col-md-3">
                             <label class="form-label" for="jornadaApo2">Jornada Laboral</label>
-                            <input type="text" class="form-control text-uppercase" id="jornadaApo2">
+                            <select class="form-select" id="jornadaApo2">
+                                <option value="">Seleccione...</option>
+                                <option value="COMPLETA">COMPLETA</option>
+                                <option value="PART-TIME">PART-TIME</option>
+                                <option value="EXCEPCIONAL">EXCEPCIONAL</option>
+                            </select>
                         </div>
                         <div class="col-md-3">
                             <label class="form-label" for="telLabApo2">Teléfono Trabajo</label>
@@ -502,9 +508,13 @@
                         </div>
 
                         <div class="col-md-12 mt-3">
-                            <label class="form-label" for="redApoyo">Redes de Apoyo / Programas (PIE, JUNAEB, Subsidios,
-                                etc.)</label>
-                            <input type="text" class="form-control text-uppercase" id="redApoyo">
+                            <label class="form-label" for="redApoyo">Redes de Apoyo / Programas estatales</label>
+                            <select class="form-select" id="redApoyo">
+                                <option value="">Seleccione...</option>
+                                <option value="SENDA">SENDA</option>
+                                <option value="PROGRAMA PUENTE">PROGRAMA PUENTE</option>
+                                <option value="NINGUNO">NINGUNO</option>
+                            </select>
                         </div>
                     </div>
                 </div>
