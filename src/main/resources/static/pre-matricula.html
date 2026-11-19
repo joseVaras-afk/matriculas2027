@@ -19,7 +19,8 @@
         <div class="text-center mb-4">
             <img src="assets/logo.png" alt="Logo Escuela" class="logo-escuela" onerror="this.style.display='none'">
             <h2 class="fw-bold" style="color: var(--azul-marino);">FICHA DE PRE-MATRÍCULA 2027</h2>
-            <p class="text-muted mb-0">Complete todos los campos requeridos para registrar la postulación</p>
+            <p class="text-muted mb-0">Complete todos los campos requeridos para registrar la postulación, <b>UTILIZA
+                    SOLO DATOS REALES</b>, ya que estos seran validados el día de la matrÍcula</p>
         </div>
 
         <form id="formularioMatricula" class="needs-validation" novalidate>
@@ -68,7 +69,7 @@
                     <div class="row g-3">
                         <div class="col-md-4">
                             <label class="form-label" for="alumnaRut">RUT / IPE Estudiante *</label>
-                            <input type="text" class="form-control rut-input" id="alumnaRut" placeholder="12345678-9"
+                            <input type="text" class="form-control rut-input" id="alumnaRut" placeholder="IPA o RUT"
                                 required>
                             <div class="invalid-feedback">Ingrese un RUT válido.</div>
                         </div>
@@ -207,7 +208,8 @@
                     <div class="row g-3">
                         <div class="col-md-4">
                             <label class="form-label" for="apoRut">RUT Apoderado *</label>
-                            <input type="text" class="form-control rut-input" id="apoRut" required>
+                            <input type="text" class="form-control rut-input" id="apoRut" placeholder="IPA o RUT"
+                                required>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label" for="apoNombres">Nombres *</label>
