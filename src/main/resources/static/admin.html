@@ -68,14 +68,14 @@
                         <div class="input-group">
                             <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
                             <input type="text" id="inputBuscar" class="form-control"
-                                placeholder="Nombre, RUT o Folio..." onkeyup="filtrarTabla()">
+                                placeholder="Nombre de la alumna o Folio..." oninput="filtrarTabla()">
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <label class="form-label fw-bold small text-muted mb-1">Filtrar por Curso</label>
                         <select id="selectFiltroCurso" class="form-select" onchange="filtrarTabla()">
-                            <option value="">Seleccione curso...</option>
+                            <option value="">Todos los cursos</option>
                             <option value="Kínder">Kínder</option>
                             <option value="1° Básico A">1° Básico A</option>
                             <option value="1° Básico B">1° Básico B</option>
@@ -149,6 +149,14 @@
             return String(texto).trim();
         }
 
+        // Elimina tildes y convierte a minúsculas para búsquedas y filtros insensibles a acentos
+        function normalizar(texto) {
+            return val(texto)
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLowerCase();
+        }
+
         async function cargarMatriculas() {
             const tbody = document.getElementById('tablaMatriculasBody');
             try {
@@ -199,7 +207,7 @@
                 tr.innerHTML = `
                     <td class="ps-3 fw-bold text-primary">${val(folio) || '---'}</td>
                     <td>
-                        <div class="fw-bold">${nomAlumna}</div>
+                        <div class="fw-bold">${val(nomAlumna) || 'Sin Nombre'}</div>
                     </td>
                     <td><span class="badge bg-light text-dark border px-3 py-2 fs-6">${val(curso) || '---'}</span></td>
                     <td class="text-center">${badgeEstado}</td>
@@ -224,19 +232,18 @@
         }
 
         function filtrarTabla() {
-            const textoQuery = document.getElementById('inputBuscar').value.toLowerCase().trim();
-            const cursoSeleccionado = document.getElementById('selectFiltroCurso').value.trim();
+            const textoQuery = normalizar(document.getElementById('inputBuscar').value);
+            const cursoSeleccionado = normalizar(document.getElementById('selectFiltroCurso').value);
 
             const filtradas = listaMatriculasGlobal.filter(m => {
                 if (!m) return false;
 
-                const alu = m.alumna || {};
-                const textoAlumna = `${val(alu?.nombres)} ${val(alu?.apellidoPaterno)} ${val(alu?.apellidoMaterno)} ${val(alu?.rut)}`.toLowerCase();
-                const folio = val(m.numeroMatricula).toLowerCase();
-                const cursoMatricula = val(m.cursoActual).toUpperCase().trim();
+                const nombreAlumna = normalizar(m.nombreCompletoAlumna);
+                const folio = normalizar(m.numeroMatricula);
+                const cursoMatricula = normalizar(m.cursoPostulacion);
 
-                const coincideTexto = textoAlumna.includes(textoQuery) || folio.includes(textoQuery);
-                const coincideCurso = (cursoSeleccionado === "") || (cursoMatricula === cursoSeleccionado);
+                const coincideTexto = textoQuery === '' || nombreAlumna.includes(textoQuery) || folio.includes(textoQuery);
+                const coincideCurso = cursoSeleccionado === '' || cursoMatricula === cursoSeleccionado;
 
                 return coincideTexto && coincideCurso;
             });
@@ -269,7 +276,13 @@
                 });
 
                 if (res.ok) {
-                    cargarMatriculas();
+                    const registro = listaMatriculasGlobal.find(m => m.id === id);
+                    if (registro) {
+                        registro.estadoFicha = nuevoEstado;
+                        filtrarTabla();
+                    } else {
+                        cargarMatriculas();
+                    }
                 } else {
                     alert('No se pudo actualizar el estado.');
                 }
