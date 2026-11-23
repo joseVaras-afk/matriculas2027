@@ -225,7 +225,7 @@
 
         function filtrarTabla() {
             const textoQuery = document.getElementById('inputBuscar').value.toLowerCase().trim();
-            const cursoSeleccionado = document.getElementById('selectFiltroCurso').value.toUpperCase().trim();
+            const cursoSeleccionado = document.getElementById('selectFiltroCurso').value.trim();
 
             const filtradas = listaMatriculasGlobal.filter(m => {
                 if (!m) return false;
